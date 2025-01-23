@@ -16,6 +16,8 @@ import PlaceOrder from './pages/PlaceOrders'
 import Orders from './pages/Orders'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
+import SearchBar from './components/SearchBar'
+import { ShopContextProvider } from './context/ShopContext';
 
 
 
@@ -24,11 +26,14 @@ import Footer from './components/Footer'
 const App = () => {
   return (
 
+    <ShopContextProvider>  
     // This div adds padding to the page for different screen sizes
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'> 
 
         {/* using self closing tag for navigation */}
         <NavBar />
+        {/* for searchbar */}
+        <SearchBar/>
           
 
         {/* Define the routes for the application */}
@@ -50,6 +55,8 @@ const App = () => {
             <Footer/>
         
     </div>
+
+    </ShopContextProvider>
   )
 }
 
