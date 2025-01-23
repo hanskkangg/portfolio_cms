@@ -10,7 +10,7 @@ const SearchBar = () => {
     // State to check if search bar should be visible
     const [visible, setVisible] = useState(false);
 
-    // Get the current page location (URL path)
+    // Get the use location hook
     const location = useLocation();
 
     // Check if the current page is "collection" and show the search bar

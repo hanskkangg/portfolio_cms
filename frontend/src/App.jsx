@@ -17,16 +17,13 @@ import Orders from './pages/Orders'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import SearchBar from './components/SearchBar'
-import { ShopContextProvider } from './context/ShopContext';
-
-
+import ShopContext from './context/ShopContext'
 
 
 
 const App = () => {
   return (
 
-    <ShopContextProvider>  
     // This div adds padding to the page for different screen sizes
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'> 
 
@@ -56,7 +53,6 @@ const App = () => {
         
     </div>
 
-    </ShopContextProvider>
   )
 }
 
