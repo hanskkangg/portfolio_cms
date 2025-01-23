@@ -18,6 +18,8 @@ import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import SearchBar from './components/SearchBar'
 import ShopContext from './context/ShopContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -26,7 +28,7 @@ const App = () => {
 
     // This div adds padding to the page for different screen sizes
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'> 
-
+        <ToastContainer/>
         {/* using self closing tag for navigation */}
         <NavBar />
         {/* for searchbar */}
