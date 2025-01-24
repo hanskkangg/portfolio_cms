@@ -19,4 +19,4 @@ const productSchema = new mongoose.Schema({
 //when product is availbe the model will be used, if its not available it will create one 
 const productModel = mongoose.models.product || mongoose.model("product",productSchema)
 
-export default productModel
+export default productModels

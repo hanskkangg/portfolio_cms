@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { isEmpty } from "validator";
 
 //creating user schema
 
@@ -18,6 +17,6 @@ const userSchema = new mongoose.Schema({
 }, {minimize:false})
 
 
-const userModel = mongoose.models.user || mongoose.model('user', userSchema);
+const userModels = mongoose.models.user || mongoose.model('user', userSchema);
 
 export default userModels
