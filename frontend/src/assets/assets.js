@@ -79,6 +79,7 @@ import master_logo from './master_logo.png';
 import visa_logo from './visa_logo.png'
 import paypal_logo from './paypal_logo.png'
 import paypal_logo1 from './paypal_logo1.png'
+import about_us from './about_us.png'
 
 export const assets = {
     logo,
@@ -105,7 +106,8 @@ export const assets = {
     master_logo,
     visa_logo,
     paypal_logo,
-    paypal_logo1
+    paypal_logo1,
+    about_us
 }
 
 
