@@ -174,42 +174,66 @@ const PlaceOrders = () => {
             </div>
 
             {/* ------------- Right Side ------------------ */}
-            <div className='mt-8'>
+            <div className='flex flex-col gap-4 w-full sm:max-w-[480px]'>
 
-                <div className='mt-8 min-w-80'>
+                <div className='text-xl sm:text-2xl my-3'>
                     <CartTotal />
                 </div>
 
                 <div className='mt-12'>
                     <Title text1={'PAYMENT'} text2={'METHOD'} />
+
+
+                    
+
                     {/* --------------- Payment Method Selection ------------- */}
-                    <div className='flex gap-3 flex-col lg:flex-row'>
+                    
+                    
+                    <div className="lg:flex-row gap-4 mt-4">
+
+
                         
-                    <div onClick={() => setMethod('paypal')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+  {/* PayPal */}
+  <div onClick={() => setMethod('paypal')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
                             <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'paypal' ? 'bg-green-400' : ''}`}></p>
-                            <img className='h-5 mx-4' src={assets.paypal_logo1} alt="" />
+                            <img className='min-w-24 h-8 ' src={assets.paypal_logo1} alt="" />
+                            <p>PAYPAL</p>
                         </div>
 
-                        
-                        <div onClick={() => setMethod('mastercard')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+
+  {/* Mastercard */}
+  <div onClick={() => setMethod('mastercard')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
                             <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'mastercard' ? 'bg-green-400' : ''}`}></p>
-                            <img className='h-5 mx-4' src={assets.visa_logo} alt="" />
+                            <img className='min-w-24 h-10 ' src={assets.visa_logo} alt="" />
+                            <>Master Card / VISA</>
                         </div>
 
 
-                        <div onClick={() => setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+  {/* Stripe */}
+  <div onClick={() => setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
                             <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
-                            <img className='h-5 mx-4' src={assets.stripe_logo} alt="" />
+                            <img className='min-w-24 h-10 ' src={assets.stripe_logo} alt="" />
+                            <p>STRIPE</p>
                         </div>
-                        <div onClick={() => setMethod('razorpay')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+
+  {/* Razorpay */}
+
+  <div onClick={() => setMethod('razorpay')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
                             <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'razorpay' ? 'bg-green-400' : ''}`}></p>
-                            <img className='h-5 mx-4' src={assets.razorpay_logo} alt="" />
+                            <img className='min-w-24 h-10' src={assets.razorpay_logo} alt="" />
+                            <p>RAZORPAY</p>
                         </div>
-                        <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
-                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
-                            <p className='text-gray-500 text-sm font-medium mx-4'>CASH ON DELIVERY</p>
-                        </div>
-                    </div>
+
+
+
+  {/* Cash on Delivery */}
+  <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+    <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
+    <p className='text-sm font-medium min-w-24 h-10'>PAY AT DELIVERY</p>
+  </div>
+  </div>
+
+
 
                     <div className='w-full text-end mt-8'>
                         <button type='submit' className='bg-black text-white px-16 py-3 text-sm'>PLACE ORDER</button>
