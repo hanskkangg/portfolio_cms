@@ -1,7 +1,7 @@
 import React from 'react'
 import Title from '../components/Title'
 import { assets } from '../assets/assets'
-import NewsletterBox from '../components/Newsletter'
+import NewsletterBox from '../components/NewsLetter'
 
 const About = () => {
   return (
@@ -11,11 +11,13 @@ const About = () => {
           <Title text1={'ABOUT'} text2={'US'} />
       </div>
 
-      <div className='my-10 flex flex-col md:flex-row gap-16'>
+      <div className='mt-10 mb-20 flex flex-col md:flex-row gap-20'>
           <img className='w-full md:max-w-[450px]' src={assets.about_us} alt="" />
-          <div className='flex flex-col justify-center gap-6 md:w-2/4 text-gray-600'>
+          <div className='flex flex-col gap-6 md:w-2/4 text-gray-600'>
 
-              <p>Like A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It OffLike A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It Off</p>
+          <b className='text-gray-800'>Our Story</b>
+              <p>Like A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It Off
+              </p>
 
               <p>LUQMAN AJMAL Institute is a self- financial co-education institute dedicated to the training of medical and Vocational Training related courses.LUQMAN AJMAL Institute is a self- financial co-education institute dedicated to the training of medical and Vocational Training related courses.</p>
 
@@ -25,7 +27,7 @@ const About = () => {
           </div>
       </div>
 
-      <div className=' text-xl py-4'>
+      <div className=' text-2xl py-4 text-center'>
           <Title text1={'WHY'} text2={'CHOOSE US'} />
       </div>
 
