@@ -75,6 +75,10 @@ import cross_icon from './cross_icon.png';
 import p_img_pizza from './p_img_pizza.png';
 import hans_logo1 from './hans_logo1.png';
 import hans_logo2 from './hans_logo2.png';
+import master_logo from './master_logo.png';
+import visa_logo from './visa_logo.png'
+import paypal_logo from './paypal_logo.png'
+import paypal_logo1 from './paypal_logo1.png'
 
 export const assets = {
     logo,
@@ -97,7 +101,11 @@ export const assets = {
     cross_icon,
     p_img_pizza,
     hans_logo1,
-    hans_logo2
+    hans_logo2,
+    master_logo,
+    visa_logo,
+    paypal_logo,
+    paypal_logo1
 }
 
 
