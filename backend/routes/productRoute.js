@@ -1,21 +1,24 @@
-import express from 'express'
-import  { listProducts, addProduct, removeProduct, singleProduct } from '../controllers/productController'
+import express from 'express';
+import { listProducts, addProduct, removeProduct, singleProduct } from '../controllers/productController.js';
+import upload from '../middleware/multer.js';
 
 const productRoute = express.Router();
 
-productRoute.post('')
-
-
-// Route to add a new product
-productRouter.post('/add',addProduct);
+// Route to add a new product with multiple image uploads
+productRoute.post('/add', upload.fields([
+    { name: 'image1', maxCount: 1 },
+    { name: 'image2', maxCount: 1 },
+    { name: 'image3', maxCount: 1 },
+    { name: 'image4', maxCount: 1 }
+]), addProduct);
 
 // Route to remove a product
-productRouter.post('/remove',removeProduct);
+productRoute.post('/remove', removeProduct);
 
 // Route to get a single product by ID
-productRouter.post('/single',singleProduct);
+productRoute.post('/single', singleProduct);
 
 // Route to list all products
-productRouter.get('/list',listProducts)
+productRoute.get('/list', listProducts);
 
-export default productRouter
+export default productRoute;
