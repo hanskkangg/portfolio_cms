@@ -1,14 +1,11 @@
 import './App.css'
+import React from 'react'
 
 function App() {
 
   return (
     <>
-      <div>
-      </div>
-        <h1 class="text-3xl font-bold underline bg-gray-700 p-5">
-    Hello world!
-  </h1>
+    
     </>
   )
 }
