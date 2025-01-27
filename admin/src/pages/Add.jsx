@@ -2,7 +2,16 @@ import React from 'react'
 
 const Add = () => {
   return (
-    <div>Add</div>
+    <div>
+
+      <p>Upload image
+
+        
+      </p>
+
+
+
+    </div>
   )
 }
 
