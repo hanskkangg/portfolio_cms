@@ -15,6 +15,12 @@ const Collection = () => {
   const [subCategory, setSubCategory] = useState([]); // Stores selected product subcategories
   const [sortType, setSortType] = useState('relavent'); // Stores the selected sorting type
 
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Instantly move to the top of the page
+  }, []);
+  
   // Function to toggle category selection
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
@@ -37,6 +43,14 @@ const Collection = () => {
     }
   };
 
+
+
+  // Function to handle scrolling to the top
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to the top
+  };
+
+  
   // Function to apply filtering logic based on category, subcategory, and search
   const applyFilter = () => {
     let productsCopy = products.slice(); // Create a copy of the products array to avoid mutating the original data

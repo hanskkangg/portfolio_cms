@@ -22,6 +22,7 @@ const Login = () => {
     event.preventDefault(); 
 
     try {
+      
       if (currentState === 'Sign Up') {
         // If the user is signing up, send a request to the registration API
         const response = await axios.post(backendUrl + '/api/user/register', { name, email, password });
