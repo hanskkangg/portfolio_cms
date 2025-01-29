@@ -28,6 +28,8 @@ const PlaceOrders = () => {
         setFormData(data => ({ ...data, [name]: value }))
     }
 
+    
+
     const onSubmitHandler = async (event) => {
         event.preventDefault()
         try {
