@@ -70,7 +70,7 @@ const PlaceOrders = () => {
 
                     case 'mastercard':
                     const responseMastercard = await axios.post(backendUrl + '/api/order/place',orderData,{headers:{token}})
-                    if (responseMastercarde.data.success) {
+                    if (responseMastercard.data.success) {
                         const {session_url} = responseMastercard.data
                         window.location.replace(session_url)
                     } else {
@@ -164,21 +164,20 @@ const PlaceOrders = () => {
                         </div>
 
 
-  {/* Mastercard */}
-  <div onClick={() => setMethod('mastercard')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
-                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'mastercard' ? 'bg-green-400' : ''}`}></p>
-                            <img className='min-w-24 h-10 ' src={assets.visa_logo} alt="" />
-                            <>Master Card / VISA</>
-                        </div>
-
 
   {/* Stripe */}
   <div onClick={() => setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
                             <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
-                            <img className='min-w-24 h-10 ' src={assets.stripe_logo} alt="" />
-                            <p>STRIPE</p>
+                            <img className='min-w-24 h-10 ' src={assets.visa_logo} alt="" />
+                            <p>Master Card / VISA</p>
                         </div>
 
+
+  {/* Cash on Delivery */}
+  <div onClick={() => setMethod('mastercard')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+    <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'mastercard' ? 'bg-green-400' : ''}`}></p>
+    <p className='text-sm font-medium min-w-24 h-10'>E-Transfer</p>
+  </div>
 
   {/* Cash on Delivery */}
   <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>

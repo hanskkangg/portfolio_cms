@@ -9,11 +9,14 @@ const Orders = () => {
 
   const [orderData,setorderData] = useState([])
 
+  const [trackingOrder, setTrackingOrder] = useState(null); // Track selected order
+
+
   const loadOrderData = async () => {
     try {
       if (!token) {
         return null
-      } 
+      }
 
       const response = await axios.post(backendUrl + '/api/order/userorders',{},{headers:{token}})
       if (response.data.success) {
@@ -39,6 +42,12 @@ const Orders = () => {
     loadOrderData()
   },[token])
 
+
+
+  // Function to open tracking modal
+  const trackOrder = (order) => {
+    setTrackingOrder(order);
+  };
   return (
     <div className='border-t pt-16'>
 
@@ -68,14 +77,42 @@ const Orders = () => {
                             <p className='min-w-2 h-2 rounded-full bg-green-500'></p>
                             <p className='text-sm md:text-base'>{item.status}</p>
                         </div>
-                        <button onClick={loadOrderData} className='border px-4 py-2 text-sm font-medium rounded-sm'>Track Order</button>
-                    </div>
-                </div>
-              ))
-            }
-        </div>
-    </div>
-  )
-}
+                        
+              {/* Track Order Button */}
+              <button onClick={() => trackOrder(item)} className='border px-4 py-2 text-sm font-medium rounded-sm'>
+                Track Order
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
 
-export default Orders
+      {/* Order Tracking Modal */}
+      {trackingOrder && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h2 className="text-lg font-bold mb-4">Tracking Order</h2>
+            <p className="text-sm text-gray-600">Order: {trackingOrder.name}</p>
+            <div className="mt-4">
+              {/* Order Tracking Progress */}
+              <ul className="space-y-2">
+                {["Order Placed", "Packing", "Shipped", "Out for delivery", "Delivered"].map((step, index) => (
+                  <li key={index} className={`p-2 border-l-4 ${step === trackingOrder.status ? "border-blue-500 font-bold" : "border-gray-300"}`}>
+                    {step}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Close Button */}
+            <button onClick={() => setTrackingOrder(null)} className="mt-4 w-full bg-blue-500 text-white py-2 rounded">
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Orders;

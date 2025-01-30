@@ -115,39 +115,27 @@ const placeOrderStripe = async (req,res) => {
     }
 }
 
-// Verify Stripe Payment
-const verifyStripe = async (req,res) => {
+    // Verify Stripe 
+    const verifyStripe = async (req,res) => {
 
-    const { orderId, success, userId } = req.body
+        const { orderId, success, userId } = req.body
 
-    try {
-        if (success === "true") {
-
-            // Mark order as paid
-            await orderModels.findByIdAndUpdate(orderId, {payment:true});
-            await userModels.findByIdAndUpdate(userId, {cartData: {}})
-
+        try {
+            if (success === "true") {
+                await orderModels.findByIdAndUpdate(orderId, {payment:true});
+                await userModels.findByIdAndUpdate(userId, {cartData: {}})
+                res.json({success: true});
+            } else {
+                await orderModels.findByIdAndDelete(orderId)
+                res.json({success:false})
+            }
             
-            res.json({ 
-                success: true, 
-                message: "Thank you for your purchase! Your payment was successful." 
-            });
-
-            // Delete order if payment fails
-        } else {
-            await orderModels.findByIdAndDelete(orderId);
-            res.json({ 
-                success: false, 
-                message:error.message 
-            });
+        } catch (error) {
+            console.log(error)
+            res.json({success:false,message:error.message})
         }
-        
-    } catch (error) {
-        console.log(error)
-        res.json({success:false,message:error.message})
-    }
 
-}
+    }
 
 
 // All Orders data for Admin Panel

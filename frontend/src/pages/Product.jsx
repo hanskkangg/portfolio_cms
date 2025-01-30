@@ -3,6 +3,11 @@ import { useParams } from 'react-router-dom'; // Get product ID from URL
 import { ShopContext } from '../context/ShopContext'; // Import global ShopContext
 import { assets } from '../assets/assets'; // Import icons and images
 import RelatedProducts from '../components/RelatedProducts'; // Import related products component
+import { useNavigate } from 'react-router-dom';
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Product = () => {
   // Get productId from the URL
@@ -19,6 +24,8 @@ const Product = () => {
 
   // State for storing selected size
   const [size, setSize] = useState('');
+
+  const navigate = useNavigate();
 
   // Function to find product data based on the productId from URL
   const fetchProductData = () => {
@@ -103,12 +110,36 @@ const Product = () => {
               ))}
             </div>
           </div>
-
-          {/* Add to Cart Button */}
-          <button onClick={() => addToCart(productData._id, size)} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>
-            ADD TO CART
+{/* Add to Cart Button */}
+<button 
+  onClick={() => {
+    if (!size) {
+      toast.error("⚠️ Please select a size before adding to cart!", { position: "top-right" });
+      return;
+    }
+    
+    addToCart(productData._id, size);
+    
+    toast.success(
+      <div className="text-center text-black">
+        🛒 Item has been added to your cart!
+        <br />
+        <div className="flex justify-center mt-2">
+          <button 
+            onClick={() => navigate('/cart')} 
+            className="bg-blue-500 text-white px-3 py-1 rounded text-xs"
+          >
+            Go to Cart
           </button>
-
+        </div>
+      </div>, 
+      { position: "top-right", autoClose: 5000 }
+    );
+  }} 
+  className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'
+>
+  ADD TO CART
+</button>
           <hr className='mt-8 sm:w-4/5' />
 
           {/* Extra Information */}
