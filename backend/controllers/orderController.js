@@ -63,7 +63,7 @@ const placeOrderStripe = async (req,res) => {
             items,
             address,
             amount,
-            paymentMethod:"Stripe",
+            paymentMethod:"Mastercard / Visa",
             payment:false,
             date: Date.now()
         }
