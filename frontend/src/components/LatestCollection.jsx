@@ -20,9 +20,9 @@ const LatestCollection = () => {
 
   return (
     <div className='my-10 '>
-        <div className='text-center py-8 text-3x1'>
+      <div className='text-center text-2xl py-8 dark:text-white'>
             <Title text1={'LATEST'} text2={'COLLECTIONS'} />
-            <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>
+            <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-400'>
             
             Nokia today announced that it has acq
             uired Rapid’s technology assets, including the world’s largest API marketplace, and its highly skilled team.

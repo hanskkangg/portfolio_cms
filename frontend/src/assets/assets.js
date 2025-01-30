@@ -82,6 +82,8 @@ import paypal_logo1 from './paypal_logo1.png'
 import about_us from './about_us.png'
 import callme from './callme.png'
 import banana_sale from './banana_sale.png'
+import moon_icon from './moon_icon.png'
+import sun_icon from './sun_icon.png'
 
 export const assets = {
     logo,
@@ -111,7 +113,9 @@ export const assets = {
     paypal_logo1,
     about_us,
     callme,
-    banana_sale
+    banana_sale,
+    moon_icon,
+    sun_icon
 }
 
 

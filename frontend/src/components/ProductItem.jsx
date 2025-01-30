@@ -8,14 +8,14 @@ const ProductItem = ({id,image,name,price}) => {
    
 
   return (
-  <Link className='text-gray-700 cursor-pointer' to={`/product/${id}`}>
+  <Link className='text-gray-700 cursor-pointer  dark:text-gray-100' to={`/product/${id}`}>
 
         <div className='overflow-hidden'> 
-            <img className='hover:scale-110 transition ease-in-out' src ={image[0]} alt ='' />
+            <img className='hover:scale-110 transition ease-in-out  dark:text-gray-100' src ={image[0]} alt ='' />
         </div>
 
-        <p className=' pt-3 pb-1 text-sm'>{name}</p>
-        <p className = 'text-sm font-medium'>{currency} {price}</p>
+        <p className='pt-3 pb-1 text-md text-black dark:text-gray-50'>{name}</p>
+        <p className = 'text-sm font-medium dark:text-gray-300'>{currency} {price}</p>
     
     </Link>
   )
