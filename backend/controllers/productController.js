@@ -1,6 +1,5 @@
-import { v2 as cloudinary } from "cloudinary"
-import productModels from "../models/productModels.js"
-
+import { v2 as cloudinary } from "cloudinary";
+import productModels from "../models/productModels.js";
 
 //function to add product
 const addProduct = async(req,res) =>{
@@ -89,23 +88,59 @@ const removeProduct = async (req, res) => {
         res.json({ success: false, message: error.message })
     }
 }
-
-
-// function for single product info
-const singleProduct = async (req, res) => {
+const updateProduct = async (req, res) => {
     try {
-        
-        // Extract product ID from request body
-        const { productId } = req.body
+        const { productId } = req.params;
+        const { name, description, price, category, subCategory, bestseller, sizes } = req.body;
 
-        // Find product by ID in the database
-        const product = await productModels.findById(productId)
-        res.json({success:true,product})
+        let product = await productModels.findById(productId);
+        if (!product) {
+            return res.status(404).json({ success: false, message: "Product not found" });
+        }
+
+        console.log("Before Update:", product);
+
+        product.name = name;
+        product.description = description;
+        product.price = Number(price); // ✅ Ensure price is converted to a number
+        product.category = category;
+        product.subCategory = subCategory;
+        product.bestseller = bestseller === "true"; // ✅ Convert string to boolean
+
+        // ✅ Fix Sizes: Ensure it's stored correctly in the database
+        product.sizes = sizes ? JSON.parse(sizes) : [];
+
+        await product.save();
+        console.log("After Update:", product);
+
+        res.json({ success: true, message: "Product updated successfully!", updatedProduct: product });
 
     } catch (error) {
-        console.log(error)
-        res.json({ success: false, message: error.message })
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+
+
+const singleProduct = async (req, res) => {
+    try {
+        // Extract product ID from URL parameters
+        const { productId } = req.params;
+
+        // Find product by ID in the database
+        const product = await productModels.findById(productId);
+
+        if (!product) {
+            return res.status(404).json({ success: false, message: "Product not found" });
+        }
+
+        res.json({ success: true, product });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
     }
 }
 
-export { listProducts, addProduct, removeProduct, singleProduct }
+export { listProducts, addProduct, removeProduct, singleProduct, updateProduct };

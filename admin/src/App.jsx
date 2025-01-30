@@ -8,6 +8,7 @@ import Orders from './pages/Orders'
 import Login from './components/Login'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import EditProduct from './pages/editProduct'
 
 
 // Backend URL and currency constant
@@ -55,10 +56,12 @@ const App = () => {
 
               {/* Routes for different admin pages */}
               <Routes>
-                <Route path='/add' element={<Add token={token} />} />
-                <Route path='/list' element={<List token={token} />} />
-                <Route path='/orders' element={<Orders token={token} />} />
-              </Routes>
+  <Route path='/add' element={<Add token={token} />} />
+  <Route path='/list' element={<List token={token} />} />
+  <Route path='/edit/:productId' element={<EditProduct token={token} />} />
+  <Route path='/orders' element={<Orders token={token} />} />
+</Routes>
+
             </div>
           </div>
         </>
