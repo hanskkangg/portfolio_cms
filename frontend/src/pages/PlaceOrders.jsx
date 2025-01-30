@@ -19,7 +19,8 @@ const PlaceOrders = () => {
         state: '',
         zipcode: '',
         country: '',
-        phone: ''
+        phone: '',
+        specialNote: ''
     })
 
     const onChangeHandler = (event) => {
@@ -120,20 +121,34 @@ const PlaceOrders = () => {
                     <Title text1={'DELIVERY'} text2={'INFORMATION'} />
                 </div>
                 <div className='flex gap-3'>
-                    <input required onChange={onChangeHandler} name='firstName' value={formData.firstName} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='First name' />
-                    <input required onChange={onChangeHandler} name='lastName' value={formData.lastName} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='Last name' />
+                    <input required onChange={onChangeHandler} name='firstName' value={formData.firstName} className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-1.5 px-3.5 w-full' type="text" placeholder='First name' />
+                    <input required onChange={onChangeHandler} name='lastName' value={formData.lastName} className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-1.5 px-3.5 w-full' type="text" placeholder='Last name' />
                 </div>
-                <input required onChange={onChangeHandler} name='email' value={formData.email} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="email" placeholder='Email address' />
-                <input required onChange={onChangeHandler} name='street' value={formData.street} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='Street' />
+                <input required onChange={onChangeHandler} name='email' value={formData.email} className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-1.5 px-3.5 w-full' type="email" placeholder='Email address' />
+                <input required onChange={onChangeHandler} name='street' value={formData.street} className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-1.5 px-3.5 w-full' type="text" placeholder='Street' />
                 <div className='flex gap-3'>
-                    <input required onChange={onChangeHandler} name='city' value={formData.city} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='City' />
-                    <input onChange={onChangeHandler} name='state' value={formData.state} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='State' />
+                    <input required onChange={onChangeHandler} name='city' value={formData.city} className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-1.5 px-3.5 w-full' type="text" placeholder='City' />
+                    <input onChange={onChangeHandler} name='state' value={formData.state} className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-1.5 px-3.5 w-full' type="text" placeholder='State' />
                 </div>
                 <div className='flex gap-3'>
-                    <input required onChange={onChangeHandler} name='zipcode' value={formData.zipcode} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='Zipcode' />
-                    <input required onChange={onChangeHandler} name='country' value={formData.country} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='Country' />
+                    <input required onChange={onChangeHandler} name='zipcode' value={formData.zipcode} className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-1.5 px-3.5 w-full' type="text" placeholder='Zipcode' />
+                    <input required onChange={onChangeHandler} name='country' value={formData.country} className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-1.5 px-3.5 w-full' type="text" placeholder='Country' />
                 </div>
-                <input required onChange={onChangeHandler} name='phone' value={formData.phone} className='border border-gray-300 rounded py-1.5 px-3.5 w-full' type="text" placeholder='Phone Number' />
+                <input required onChange={onChangeHandler} name='phone' value={formData.phone} className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-1.5 px-3.5 w-full' type="text" placeholder='Phone Number' />
+
+                {/* ✅ Special Note Section */}
+                <textarea 
+                    name="specialNote" 
+                    value={formData.specialNote}
+                    onChange={onChangeHandler}
+                    maxLength={150} 
+                    className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-2 px-3.5 w-full resize-none' 
+                    placeholder='(OPTIONAL) Special note - max 150 characters'
+                    rows={3}>
+                </textarea>
+                <p className="text-sm text-gray-500 dark:text-gray-400 text-right">
+                    {150 - formData.specialNote.length} characters remaining
+                </p>
             </div>
 
             {/* ------------- Right Side ------------------ */}
@@ -157,7 +172,7 @@ const PlaceOrders = () => {
 
                         
   {/* PayPal */}
-  <div onClick={() => setMethod('paypal')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+  <div onClick={() => setMethod('paypal')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer dark:border-gray-700'>
                             <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'paypal' ? 'bg-green-400' : ''}`}></p>
                             <img className='min-w-24 h-8 ' src={assets.paypal_logo1} alt="" />
                             <p>PAYPAL</p>
@@ -166,7 +181,7 @@ const PlaceOrders = () => {
 
 
   {/* Stripe */}
-  <div onClick={() => setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+  <div onClick={() => setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer dark:border-gray-700'>
                             <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
                             <img className='min-w-24 h-10 ' src={assets.visa_logo} alt="" />
                             <p>Master Card / VISA</p>
@@ -174,13 +189,13 @@ const PlaceOrders = () => {
 
 
   {/* Cash on Delivery */}
-  <div onClick={() => setMethod('mastercard')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+  <div onClick={() => setMethod('mastercard')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer dark:border-gray-700'>
     <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'mastercard' ? 'bg-green-400' : ''}`}></p>
     <p className='text-sm font-medium min-w-24 h-10'>E-Transfer</p>
   </div>
 
   {/* Cash on Delivery */}
-  <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer'>
+  <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer dark:border-gray-700'>
     <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
     <p className='text-sm font-medium min-w-24 h-10'>PAY AT DELIVERY</p>
   </div>
@@ -188,8 +203,11 @@ const PlaceOrders = () => {
 
 
 
-                    <div className='w-full text-end mt-8'>
-                        <button type='submit' className='bg-black text-white px-16 py-3 text-sm'>PLACE ORDER</button>
+  <div className='w-full text-end mt-8'>
+                        <button type='submit' 
+                            className='bg-black text-white px-16 py-3 text-sm dark:bg-gray-700 dark:hover:bg-gray-600 transition-all rounded-md'>
+                            PLACE ORDER
+                        </button>
                     </div>
                 </div>
             </div>

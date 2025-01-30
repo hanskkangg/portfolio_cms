@@ -21,6 +21,7 @@ const Orders = () => {
             item['payment'] = order.payment;
             item['paymentMethod'] = order.paymentMethod;
             item['date'] = order.date;
+            item['specialNote'] = order.address.specialNote; // ✅ Add Special Note
             allOrdersItem.push(item);
           });
         });
@@ -62,8 +63,15 @@ const Orders = () => {
                   <p>Quantity: {item.quantity}</p>
                   <p>Size: {item.size}</p>
                 </div>
-                <p className='mt-1'>Date: <span className='text-gray-500 dark:text-gray-400'>{new Date(item.date).toDateString()}</span></p>
-                <p className='mt-1'>Payment: <span className='text-gray-500 dark:text-gray-400'>{item.paymentMethod}</span></p>
+                <p className='mt-1'><strong>Date:</strong> <span className='text-gray-500 dark:text-gray-400'>{new Date(item.date).toDateString()}</span></p>
+                <p className='mt-1'><strong>Payment:</strong> <span className='text-gray-500 dark:text-gray-400'>{item.paymentMethod}</span></p>
+
+                {/* ✅ Display Special Note if it exists */}
+                {item.specialNote && (
+                  <p className='mt-1 text-sm text-gray-600 dark:text-gray-200 italic'>
+                    <strong>Special Note:</strong> {item.specialNote}
+                  </p>
+                )}
               </div>
             </div>
 
