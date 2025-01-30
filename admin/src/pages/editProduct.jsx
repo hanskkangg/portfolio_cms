@@ -97,19 +97,32 @@ const EditProduct = ({ token }) => {
     <div className='p-6 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100'>
       <h2 className='text-xl font-semibold mb-4 cursor-pointer'>Edit Product</h2>
       <form onSubmit={handleUpdateProduct} className='flex flex-col gap-4'>
+        
+{/* Upload Image Section */}
+<div className='flex gap-2'>
+  {[image1, image2, image3, image4].map((img, index) => (
+    <label key={index} htmlFor={`image${index + 1}`} className='cursor-pointer'>
+      <img
+        className='w-20 h-20 object-cover border dark:border-gray-600'
+        src={img && typeof img === "object" ? URL.createObjectURL(img) : img || assets.upload_area}
+        alt={`Upload Preview ${index + 1}`}
+      />
+      <input
+        type="file"
+        id={`image${index + 1}`}
+        hidden
+        onChange={(e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const setter = [setImage1, setImage2, setImage3, setImage4][index];
+            setter(file);
+          }
+        }}
+      />
+    </label>
+  ))}
+</div>
 
-        {/* Upload Image Section */}
-        <div className='flex gap-2'>
-          {[image1, image2, image3, image4].map((img, index) => (
-            <label key={index} htmlFor={`image${index + 1}`} className='cursor-pointer'>
-              <img className='w-20' src={img ? img : assets.upload_area} alt="Upload Preview" />
-              <input type="file" id={`image${index + 1}`} hidden onChange={(e) => {
-                const setter = [setImage1, setImage2, setImage3, setImage4][index];
-                setter(e.target.files[0]);
-              }} />
-            </label>
-          ))}
-        </div>
 
         {/* Product Name */}
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} className='w-full px-3 py-2 border dark:bg-gray-800 dark:text-white' required />
