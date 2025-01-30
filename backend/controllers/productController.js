@@ -98,20 +98,37 @@ const updateProduct = async (req, res) => {
             return res.status(404).json({ success: false, message: "Product not found" });
         }
 
-        console.log("Before Update:", product);
+        // ✅ Log received files for debugging
+        console.log("Received Files:", req.files);
 
+        // Update text fields
         product.name = name;
         product.description = description;
-        product.price = Number(price); // ✅ Ensure price is converted to a number
+        product.price = Number(price);
         product.category = category;
         product.subCategory = subCategory;
-        product.bestseller = bestseller === "true"; // ✅ Convert string to boolean
+        product.bestseller = bestseller === "true";
+        product.sizes = JSON.parse(sizes); // ✅ Convert sizes from JSON string to array
 
-        // ✅ Fix Sizes: Ensure it's stored correctly in the database
-        product.sizes = sizes ? JSON.parse(sizes) : [];
+        // ✅ Handle Image Uploads to Cloudinary
+        const imageFields = ["image1", "image2", "image3", "image4"];
+        let newImages = [];
+
+        for (let field of imageFields) {
+            if (req.files[field]) {
+                const result = await cloudinary.uploader.upload(req.files[field][0].path, {
+                    folder: "products"
+                });
+                newImages.push(result.secure_url);
+            } else {
+                newImages.push(product.image[imageFields.indexOf(field)]); // Keep old image if not replaced
+            }
+        }
+
+        // ✅ Ensure images are updated correctly
+        product.image = newImages;
 
         await product.save();
-        console.log("After Update:", product);
 
         res.json({ success: true, message: "Product updated successfully!", updatedProduct: product });
 

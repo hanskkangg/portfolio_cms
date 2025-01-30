@@ -59,27 +59,27 @@ const EditProduct = ({ token }) => {
       prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
     );
   };
+
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
     try {
         const formData = new FormData();
         formData.append('name', name);
         formData.append('description', description);
-        formData.append('price', Number(price));  // ✅ Convert price to number
+        formData.append('price', Number(price));
         formData.append('category', category);
         formData.append('subCategory', subCategory);
-        formData.append('bestseller', bestseller ? "true" : "false");  // ✅ Convert boolean to string
+        formData.append('bestseller', bestseller ? "true" : "false");
+        formData.append('sizes', JSON.stringify(sizes)); // ✅ Send sizes as JSON string
 
-        // ✅ Fix: Ensure sizes are correctly sent as a JSON string
-        formData.append('sizes', JSON.stringify(sizes));
-
-        if (image1) formData.append('image1', image1);
-        if (image2) formData.append('image2', image2);
-        if (image3) formData.append('image3', image3);
-        if (image4) formData.append('image4', image4);
+        // ✅ Ensure only new images are sent
+        if (image1 && typeof image1 === "object") formData.append('image1', image1);
+        if (image2 && typeof image2 === "object") formData.append('image2', image2);
+        if (image3 && typeof image3 === "object") formData.append('image3', image3);
+        if (image4 && typeof image4 === "object") formData.append('image4', image4);
 
         const response = await axios.put(`${backendUrl}/api/product/update/${productId}`, formData, {
-            headers: { token },
+            headers: { "Content-Type": "multipart/form-data", token },
         });
 
         if (response.data.success) {
@@ -97,7 +97,7 @@ const EditProduct = ({ token }) => {
     <div className='p-6 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100'>
       <h2 className='text-xl font-semibold mb-4 cursor-pointer'>Edit Product</h2>
       <form onSubmit={handleUpdateProduct} className='flex flex-col gap-4'>
-        
+
 {/* Upload Image Section */}
 <div className='flex gap-2'>
   {[image1, image2, image3, image4].map((img, index) => (
