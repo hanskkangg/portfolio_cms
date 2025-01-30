@@ -12,6 +12,7 @@ const Collection = () => {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relavent');
+  const [bestseller, setBestseller] = useState(false); // ✅ Bestseller State
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -46,6 +47,11 @@ const Collection = () => {
       productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
     }
 
+    // ✅ Apply Bestseller Filter
+    if (bestseller) {
+      productsCopy = productsCopy.filter(item => item.bestseller === true);
+    }
+
     setFilterProducts(productsCopy);
   };
 
@@ -67,7 +73,7 @@ const Collection = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory, search, showSearch, products]);
+  }, [category, subCategory, bestseller, search, showSearch, products]);
 
   useEffect(() => {
     sortProduct();
@@ -82,6 +88,16 @@ const Collection = () => {
           FILTERS
           <img className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} src={assets.dropdown_icon} alt="Dropdown Icon" />
         </p>
+
+
+    {/* ✅ Bestseller Filter Section */}
+    <div className={`border border-gray-300 dark:border-gray-600 pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'} sm:block`}>
+          <p className='mb-3 text-sm font-medium dark:text-gray-300'>BESTSELLER</p>
+          <div className='flex gap-2 text-sm font-light text-gray-700 dark:text-gray-400'>
+            <input className='w-3' type="checkbox" checked={bestseller} onChange={() => setBestseller(!bestseller)} /> 
+            <p>Show Bestseller</p>
+          </div>
+        </div>
 
         {/* Category Filter Section */}
         <div className={`border border-gray-300 dark:border-gray-600 pl-5 py-3 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
@@ -114,6 +130,8 @@ const Collection = () => {
             </p>
           </div>
         </div>
+
+    
       </div>
 
       {/* Right Side: Product Listing Section */}
