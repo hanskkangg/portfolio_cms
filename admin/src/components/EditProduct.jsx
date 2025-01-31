@@ -51,7 +51,7 @@ const EditProduct = ({ token }) => {
         setNewImages([...e.target.files]);
     };
 
-    // 🔹 Toggle size selection
+    // 🔹 Toggle size selection d d
     const toggleSize = (size) => {
         setProduct((prevProduct) => {
             const updatedSizes = prevProduct.sizes.includes(size)
