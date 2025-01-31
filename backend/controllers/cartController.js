@@ -5,37 +5,23 @@ import userModel from "../models/userModel.js"
 const addToCart = async (req,res) => {
     try {
         
-        // Extract userId, itemId, and size from request body
         const { userId, itemId, size } = req.body
 
-
-        // Find user by ID
         const userData = await userModel.findById(userId)
         let cartData = await userData.cartData;
 
-
-        // Check if the item already exists in the cart
         if (cartData[itemId]) {
-
-            // If the same size exists, increase the quantity
             if (cartData[itemId][size]) {
                 cartData[itemId][size] += 1
             }
-
             else {
-            // If size does not exist, add size with quantity 1
                 cartData[itemId][size] = 1
             }
-
         } else {
-
-            // If item does not exist, add new item with the selected size
             cartData[itemId] = {}
             cartData[itemId][size] = 1
         }
 
-
-        // Update the user's cart in the database
         await userModel.findByIdAndUpdate(userId, {cartData})
 
         res.json({ success: true, message: "Added To Cart" })
@@ -50,20 +36,13 @@ const addToCart = async (req,res) => {
 const updateCart = async (req,res) => {
     try {
         
-        // Extract userId, itemId, size, and new quantity from request body
         const { userId ,itemId, size, quantity } = req.body
 
-
-        // Find user by ID
         const userData = await userModel.findById(userId)
         let cartData = await userData.cartData;
 
-
-        // Update the quantity of the selected size
         cartData[itemId][size] = quantity
 
-
-        // Update the user's cart in the database
         await userModel.findByIdAndUpdate(userId, {cartData})
         res.json({ success: true, message: "Cart Updated" })
 
@@ -79,11 +58,8 @@ const getUserCart = async (req,res) => {
 
     try {
         
-        // Extract userId from request body
         const { userId } = req.body
         
-
-        // Find user by ID and retrieve cart data
         const userData = await userModel.findById(userId)
         let cartData = await userData.cartData;
 
