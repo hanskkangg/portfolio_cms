@@ -86,4 +86,42 @@ const singleProduct = async (req, res) => {
     }
 }
 
+const updateProduct = async (req, res) => {
+    try {
+        const { productId, name, description, price, category, subCategory, bestseller, sizes } = req.body;
+
+        // If images are uploaded, upload to Cloudinary
+        let imagesUrl = [];
+        if (req.files) {
+            const images = Object.values(req.files);
+            imagesUrl = await Promise.all(
+                images.map(async (file) => {
+                    let result = await cloudinary.uploader.upload(file.path, { resource_type: 'image' });
+                    return result.secure_url;
+                })
+            );
+        }
+
+        const updatedData = {
+            name,
+            description,
+            price: Number(price),
+            category,
+            subCategory,
+            bestseller: bestseller === "true" ? true : false,
+            sizes: JSON.parse(sizes),
+            ...(imagesUrl.length > 0 && { image: imagesUrl }) // Update images only if new ones are uploaded
+        };
+
+        await productModel.findByIdAndUpdate(productId, updatedData);
+
+        res.json({ success: true, message: "Product Updated Successfully" });
+
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+
 export { listProducts, addProduct, removeProduct, singleProduct }
