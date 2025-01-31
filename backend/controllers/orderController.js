@@ -16,9 +16,19 @@ const placeOrder = async (req,res) => {
         
         const { userId, items, amount, address} = req.body;
 
+// ✅ Now includes array of images
+        const updatedItems = await Promise.all(items.map(async (item) => {
+            const product = await productModel.findById(item._id);
+            return {
+                ...item,
+                image: product.image, 
+            };
+        }));
+
+
         const orderData = {
             userId,
-            items,
+            items:updatedItems,
             address,
             amount,
             paymentMethod:"Cash on delivery",

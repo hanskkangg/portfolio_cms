@@ -55,13 +55,12 @@ const Orders = ({ token }) => {
         {
           orders.map((order, index) => (
             <div className='grid grid-cols-1 sm:grid-cols-[0.5fr_2fr_1fr] lg:grid-cols-[0.5fr_2fr_1fr_1fr_1fr] gap-3 items-start border-2 border-gray-200 p-5 md:p-8 my-3 md:my-4 text-xs sm:text-sm text-gray-700' key={index}>
-
-            {/* ✅ Displaying the Actual Product Image */}
-                 <div className="flex flex-col items-center gap-2">
-              {order.items.map((item, itemIndex) => (
-                <img key={itemIndex} className="w-14 h-14 object-cover rounded-md" src={item.image} alt={item.name} />
-              ))}
-            </div>
+              
+              <img 
+  className='w-12 h-12 object-cover rounded' 
+  src={order.items[0]?.image[0] || assets.default_product_image} 
+  alt={order.items[0]?.name || "Product"} 
+/>
 
               <div>
                 <div>
