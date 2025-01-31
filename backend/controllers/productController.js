@@ -85,11 +85,11 @@ const singleProduct = async (req, res) => {
         res.json({ success: false, message: error.message })
     }
 }
+
 const updateProduct = async (req, res) => {
     try {
         const { productId, name, description, price, category, subCategory, bestseller, sizes } = req.body;
 
-        // If images are uploaded, upload them to Cloudinary
         let imagesUrl = [];
         if (req.files) {
             const images = Object.values(req.files);
@@ -108,8 +108,8 @@ const updateProduct = async (req, res) => {
             category,
             subCategory,
             bestseller: bestseller === "true" ? true : false,
-            sizes: JSON.parse(sizes),
-            ...(imagesUrl.length > 0 && { image: imagesUrl }) // Update images only if new ones are uploaded
+            sizes: JSON.parse(sizes), // ✅ Ensure sizes are updated
+            ...(imagesUrl.length > 0 && { image: imagesUrl }) 
         };
 
         await productModel.findByIdAndUpdate(productId, updatedData);
@@ -121,6 +121,7 @@ const updateProduct = async (req, res) => {
         res.json({ success: false, message: error.message });
     }
 };
+
 
 // ✅ Ensure updateProduct is exported
 export { listProducts, addProduct, removeProduct, singleProduct, updateProduct };

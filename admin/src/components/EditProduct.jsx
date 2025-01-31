@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const EditProduct = ({ token }) => {
-    const { productId } = useParams(); // Get product ID from URL params
+    const { productId } = useParams();
     const navigate = useNavigate();
 
     const [product, setProduct] = useState({
@@ -21,7 +21,7 @@ const EditProduct = ({ token }) => {
 
     const [newImages, setNewImages] = useState([]);
 
-    // 🔹 Fetch product details when the page loads
+    // 🔹 Fetch product details
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -48,7 +48,18 @@ const EditProduct = ({ token }) => {
 
     // 🔹 Handle image selection
     const handleImageChange = (e) => {
-        setNewImages([...e.target.files]); // Store selected images
+        setNewImages([...e.target.files]);
+    };
+
+    // 🔹 Toggle size selection
+    const toggleSize = (size) => {
+        setProduct((prevProduct) => {
+            const updatedSizes = prevProduct.sizes.includes(size)
+                ? prevProduct.sizes.filter((s) => s !== size)
+                : [...prevProduct.sizes, size];
+
+            return { ...prevProduct, sizes: updatedSizes };
+        });
     };
 
     // 🔹 Submit updated product
@@ -66,7 +77,6 @@ const EditProduct = ({ token }) => {
             formData.append('bestseller', product.bestseller);
             formData.append('sizes', JSON.stringify(product.sizes));
 
-            // Append new images (if selected)
             newImages.forEach((image, index) => {
                 formData.append(`image${index + 1}`, image);
             });
@@ -75,7 +85,7 @@ const EditProduct = ({ token }) => {
 
             if (response.data.success) {
                 toast.success('Product updated successfully');
-                navigate('/list'); // Redirect to product list
+                navigate('/list');
             } else {
                 toast.error(response.data.message);
             }
@@ -122,6 +132,16 @@ const EditProduct = ({ token }) => {
                 <input type="checkbox" checked={product.bestseller} onChange={() => setProduct({ ...product, bestseller: !product.bestseller })} />
                 Mark as Bestseller
             </label>
+
+            {/* Product Sizes (Allow Selection) */}
+            <label>Product Sizes</label>
+            <div className="flex gap-3">
+                {['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
+                    <div key={size} onClick={() => toggleSize(size)} className={`cursor-pointer px-3 py-1 rounded ${product.sizes.includes(size) ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
+                        {size}
+                    </div>
+                ))}
+            </div>
 
             {/* Current Images */}
             <label>Current Images</label>
