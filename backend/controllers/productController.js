@@ -85,12 +85,11 @@ const singleProduct = async (req, res) => {
         res.json({ success: false, message: error.message })
     }
 }
-
 const updateProduct = async (req, res) => {
     try {
         const { productId, name, description, price, category, subCategory, bestseller, sizes } = req.body;
 
-        // If images are uploaded, upload to Cloudinary
+        // If images are uploaded, upload them to Cloudinary
         let imagesUrl = [];
         if (req.files) {
             const images = Object.values(req.files);
@@ -123,5 +122,5 @@ const updateProduct = async (req, res) => {
     }
 };
 
-
-export { listProducts, addProduct, removeProduct, singleProduct }
+// ✅ Ensure updateProduct is exported
+export { listProducts, addProduct, removeProduct, singleProduct, updateProduct };
