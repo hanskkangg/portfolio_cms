@@ -20,7 +20,7 @@ const placeOrder = async (req,res) => {
 
         const orderData = {
             userId,
-            items:updatedItems,
+            items,
             address,
             amount,
             paymentMethod:"Cash on delivery",
