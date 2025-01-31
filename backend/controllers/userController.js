@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import userModel from "../models/userModels.js";
 
 const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' }); // Expires in 7 days
+    return jwt.sign({ id }, process.env.JWT_SECRET); // No expiration set
 }
 
 // 🔹 User Login
@@ -65,13 +65,15 @@ const registerUser = async (req, res) => {
     }
 };
 
-// 🔹 Admin Login
+
 const adminLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
 
         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-            const token = jwt.sign({ admin: true, email }, process.env.JWT_SECRET, { expiresIn: '7d' });
+            const token = jwt.sign({ admin: true, email }, process.env.JWT_SECRET);
+            
+            console.log("Admin Logged In - Token:", token); // Debugging
             res.json({ success: true, token });
         } else {
             res.status(401).json({ success: false, message: "Invalid credentials" });
@@ -81,6 +83,7 @@ const adminLogin = async (req, res) => {
         console.error(error);
         res.status(500).json({ success: false, message: "Internal Server Error" });
     }
-}
+};
+
 
 export { loginUser, registerUser, adminLogin };
