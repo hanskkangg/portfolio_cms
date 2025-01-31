@@ -41,6 +41,7 @@ const placeOrder = async (req,res) => {
 
 }
 
+//addedd
 // Placing orders using Stripe Method
 const placeOrderStripe = async (req,res) => {
     try {
