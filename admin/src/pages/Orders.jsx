@@ -75,11 +75,19 @@ const Orders = ({ token }) => {
                   <p>{order.address.city + ", " + order.address.state + ", " + order.address.country + ", " + order.address.zipcode}</p>
                 </div>
                 <p>{order.address.phone}</p>
+
+              {/* ✅ Special Note (Only displayed if present) */}
+              {order.address.specialNote && (
+                <p className="mt-3 p-2 bg-yellow-100 border border-yellow-500 rounded">
+                  <strong>Special Note:</strong> {order.address.specialNote}
+                </p>
+              )}
+              
               </div>
               <div>
                 <p className='text-sm sm:text-[15px]'>Items : {order.items.length}</p>
                 <p className='mt-3'>Method : {order.paymentMethod}</p>
-                <p>Payment : { order.payment ? 'Done' : 'Pending' }</p>
+                <p>Payment : { order.payment ? 'Paid' : 'Pending' }</p>
                 <p>Date : {new Date(order.date).toLocaleDateString()}</p>
               </div>
               <p className='text-sm sm:text-[15px]'>{currency}{order.amount}</p>
