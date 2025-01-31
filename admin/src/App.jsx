@@ -7,6 +7,7 @@ import List from './pages/List'
 import Orders from './pages/Orders'
 import Login from './components/Login'
 import { ToastContainer } from 'react-toastify';
+import EditProduct from './components/EditProduct'
 import 'react-toastify/dist/ReactToastify.css';
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL
