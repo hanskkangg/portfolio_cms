@@ -38,5 +38,5 @@ const Sidebar = () => {
     </div>
   )
 }
-
+// sync
 export default Sidebar
