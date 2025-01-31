@@ -3,8 +3,8 @@ import userModel from "../models/userModel.js";
 import Stripe from 'stripe'
 
 // global variables
-const currency = 'inr'
-const deliveryCharge = 10
+const currency = 'cad'
+const deliveryCharge = 0
 
 // gateway initialize
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
@@ -21,7 +21,7 @@ const placeOrder = async (req,res) => {
             items,
             address,
             amount,
-            paymentMethod:"COD",
+            paymentMethod:"Cash on delivery",
             payment:false,
             date: Date.now()
         }
@@ -53,7 +53,7 @@ const placeOrderStripe = async (req,res) => {
             items,
             address,
             amount,
-            paymentMethod:"Stripe",
+            paymentMethod:"Mastercard / Visa",
             payment:false,
             date: Date.now()
         }
