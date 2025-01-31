@@ -5,7 +5,7 @@ import authUser from '../middleware/auth.js'
 
 const orderRouter = express.Router()
 
-// Admin Features
+// Admin Featuresddd
 orderRouter.post('/list',adminAuth,allOrders)
 orderRouter.post('/status',adminAuth,updateStatus)
 
