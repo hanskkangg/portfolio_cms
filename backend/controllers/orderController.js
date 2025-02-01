@@ -8,40 +8,34 @@ const deliveryCharge = 0
 
 // gateway initialize
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-
-// Placing orders using COD Method
-const placeOrder = async (req,res) => {
-    
+const placeOrder = async (req, res) => {
     try {
-        
-        const { userId, items, amount, address} = req.body;
+        const { userId, items, amount, address, paymentMethod } = req.body;
 
         const orderData = {
             userId,
             items,
             address,
             amount,
-            paymentMethod:"Cash on delivery",
-            payment:false,
+            paymentMethod: paymentMethod || "Cash on Delivery", // ✅ Correctly store the selected payment method
+            payment: paymentMethod === "E-Transfer" ? false : true, // ✅ Keep pending if E-Transfer
             date: Date.now()
-        }
+        };
 
-        const newOrder = new orderModel(orderData)
-        await newOrder.save()
+        const newOrder = new orderModel(orderData);
+        await newOrder.save();
 
-        await userModel.findByIdAndUpdate(userId,{cartData:{}})
+        await userModel.findByIdAndUpdate(userId, { cartData: {} });
 
-        res.json({success:true,message:"Order Placed"})
-
+        res.json({ success: true, message: "Order Placed", order: newOrder });
 
     } catch (error) {
-        console.log(error)
-        res.json({success:false,message:error.message})
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
+};
 
-}
 
-//addedd
 // Placing orders using Stripe Method
 const placeOrderStripe = async (req,res) => {
     try {
@@ -166,5 +160,7 @@ const updateStatus = async (req,res) => {
         res.json({success:false,message:error.message})
     }
 }
+
+
 
 export {verifyStripe ,placeOrder, placeOrderStripe, allOrders, userOrders, updateStatus}

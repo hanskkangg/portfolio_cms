@@ -6,10 +6,11 @@ import { ShopContext } from '../context/ShopContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 
-const PlaceOrders = () => {
 
+const PlaceOrders = () => {
     const [method, setMethod] = useState('cod');
     const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, products } = useContext(ShopContext);
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -21,96 +22,86 @@ const PlaceOrders = () => {
         country: '',
         phone: '',
         specialNote: ''
-    })
+    });
 
     const onChangeHandler = (event) => {
-        const name = event.target.name
-        const value = event.target.value
-        setFormData(data => ({ ...data, [name]: value }))
-    }
-
-    
-
+        const { name, value } = event.target;
+        setFormData(data => ({ ...data, [name]: value }));
+    };
     const onSubmitHandler = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
         try {
-
-            let orderItems = []
-
+            let orderItems = [];
+    
             for (const items in cartItems) {
                 for (const item in cartItems[items]) {
                     if (cartItems[items][item] > 0) {
-                        const itemInfo = structuredClone(products.find(product => product._id === items))
+                        const itemInfo = structuredClone(products.find(product => product._id === items));
                         if (itemInfo) {
-                            itemInfo.size = item
-                            itemInfo.quantity = cartItems[items][item]
-                            orderItems.push(itemInfo)
+                            itemInfo.size = item;
+                            itemInfo.quantity = cartItems[items][item];
+                            orderItems.push(itemInfo);
                         }
                     }
                 }
             }
-
+    
             let orderData = {
                 address: formData,
                 items: orderItems,
-                amount: getCartAmount() + delivery_fee
-            }
-            
-
+                amount: getCartAmount() + delivery_fee,
+                paymentMethod: method,  // ✅ Ensures correct payment method is sent
+                status: method === "etransfer" ? "pending" : "paid"
+            };
+    
             switch (method) {
-
-                case 'paypal':
-                    const responsePaypal = await axios.post(backendUrl + '/api/order/place',orderData,{headers:{token}})
+                case "paypal":
+                    const responsePaypal = await axios.post(backendUrl + "/api/order/place", orderData, { headers: { token } });
                     if (responsePaypal.data.success) {
-                        const {session_url} = responsePaypal.data
-                        window.location.replace(session_url)
+                        window.location.replace(responsePaypal.data.session_url);
                     } else {
-                        toast.error(responsePaypal.data.message)
+                        toast.error(responsePaypal.data.message);
                     }
                     break;
-
-                    case 'mastercard':
-                    const responseMastercard = await axios.post(backendUrl + '/api/order/place',orderData,{headers:{token}})
-                    if (responseMastercard.data.success) {
-                        const {session_url} = responseMastercard.data
-                        window.location.replace(session_url)
+    
+                case "etransfer":
+                    const responseEtransfer = await axios.post(backendUrl + "/api/order/place", orderData, { headers: { token } });
+                    if (responseEtransfer.data.success) {
+                        setCartItems({});
+                        navigate("/orders");
                     } else {
-                        toast.error(responseMastercard.data.message)
+                        toast.error(responseEtransfer.data.message);
                     }
                     break;
-
-                // API Calls for COD
-                case 'cod':
-                    const response = await axios.post(backendUrl + '/api/order/place',orderData,{headers:{token}})
+    
+                case "cod":
+                    const response = await axios.post(backendUrl + "/api/order/place", orderData, { headers: { token } });
                     if (response.data.success) {
-                        setCartItems({})
-                        navigate('/orders')
+                        setCartItems({});
+                        navigate("/orders");
                     } else {
-                        toast.error(response.data.message)
+                        toast.error(response.data.message);
                     }
                     break;
-
-                    case 'stripe':
-                        const responseStripe = await axios.post(backendUrl + '/api/order/stripe',orderData,{headers:{token}})
-                        if (responseStripe.data.success) {
-                            const {session_url} = responseStripe.data
-                            window.location.replace(session_url)
-                        } else {
-                            toast.error(responseStripe.data.message)
-                        }
-                        break;
-                        
+    
+                case "stripe":
+                    const responseStripe = await axios.post(backendUrl + "/api/order/stripe", orderData, { headers: { token } });
+                    if (responseStripe.data.success) {
+                        window.location.replace(responseStripe.data.session_url);
+                    } else {
+                        toast.error(responseStripe.data.message);
+                    }
+                    break;
+    
                 default:
                     break;
             }
-
-
         } catch (error) {
-            console.log(error)
-            toast.error(error.message)
+            console.log(error);
+            toast.error(error.message);
         }
-    }
-
+    };
+    
 
     return (
         <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t'>
@@ -187,19 +178,19 @@ const PlaceOrders = () => {
                             <p>Master Card / VISA</p>
                         </div>
 
-
-  {/* Cash on Delivery */}
-  <div onClick={() => setMethod('mastercard')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer dark:border-gray-700'>
-    <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'mastercard' ? 'bg-green-400' : ''}`}></p>
-    <p className='text-sm font-medium min-w-24 h-10'>E-Transfer</p>
-  </div>
+       
 
   {/* Cash on Delivery */}
   <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer dark:border-gray-700'>
     <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
-    <p className='text-sm font-medium min-w-24 h-10'>PAY AT DELIVERY</p>
+    <p className='text-sm font-medium min-w-24 h-10'>Cash on Delivery</p>
   </div>
-  </div>
+               
+                        {/* ✅ E-Transfer Option */}
+                        <div onClick={() => setMethod('etransfer')} className='flex items-center gap-3 border p-2 cursor-pointer'>
+                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'etransfer' ? 'bg-green-400' : ''}`}></p>
+                            <p>E-Transfer</p>
+                        </div></div>
 
 
 

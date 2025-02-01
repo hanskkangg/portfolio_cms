@@ -88,6 +88,7 @@ const removeProduct = async (req, res) => {
         res.json({ success: false, message: error.message })
     }
 }
+
 const updateProduct = async (req, res) => {
     try {
         const { productId } = req.params;
@@ -141,7 +142,7 @@ const updateProduct = async (req, res) => {
 
 
 const singleProduct = async (req, res) => {
-    try {
+    try {response
         // Extract product ID from URL parameters
         const { productId } = req.params;
 

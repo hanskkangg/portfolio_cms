@@ -1,22 +1,32 @@
-import express from 'express'
-import {placeOrder, placeOrderStripe, allOrders, userOrders, updateStatus, verifyStripe,} from '../controllers/orderController.js'
-import adminAuth  from '../middleware/adminAuth.js'
-import authUser from '../middleware/auth.js'
+import express from 'express';
+import {
+    placeOrder,
+    placeOrderStripe,
+    allOrders,
+    userOrders,
+    updateStatus,
+    verifyStripe,
+} from '../controllers/orderController.js';
 
-const orderRouter = express.Router()
+import adminAuth from '../middleware/adminAuth.js';
+import authUser from '../middleware/auth.js';
 
-// Admin Featuresddd
-orderRouter.post('/list',adminAuth,allOrders)
-orderRouter.post('/status',adminAuth,updateStatus)
+const orderRouter = express.Router();
 
-// Payment Features
-orderRouter.post('/place',authUser,placeOrder)
-orderRouter.post('/stripe',authUser,placeOrderStripe)
+// 🔹 Admin Features
+orderRouter.post('/list', adminAuth, allOrders);
+orderRouter.post('/status', adminAuth, updateStatus);
 
-// User Feature 
-orderRouter.post('/userorders',authUser,userOrders)
+// 🔹 Payment Features
+orderRouter.post('/placeEtransfer', authUser, placeOrder);
+orderRouter.post('/place', authUser, placeOrder);
+orderRouter.post('/stripe', authUser, placeOrderStripe);
 
-// verify payment
-orderRouter.post('/verifyStripe',authUser, verifyStripe)
+// 🔹 User Feature 
+orderRouter.post('/userorders', authUser, userOrders);
 
-export default orderRouter
+// 🔹 Verify Stripe Payment
+orderRouter.post('/verifyStripe', authUser, verifyStripe);
+
+
+export default orderRouter;
