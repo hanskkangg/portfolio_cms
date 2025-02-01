@@ -140,9 +140,8 @@ const updateProduct = async (req, res) => {
 };
 
 
-
 const singleProduct = async (req, res) => {
-    try {response
+    try {
         // Extract product ID from URL parameters
         const { productId } = req.params;
 
@@ -156,9 +155,10 @@ const singleProduct = async (req, res) => {
         res.json({ success: true, product });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: error.message });
+        console.error("🔥 Error fetching single product:", error);
+        res.status(500).json({ success: false, message: "Internal Server Error" });
     }
-}
+};
+
 
 export { listProducts, addProduct, removeProduct, singleProduct, updateProduct };

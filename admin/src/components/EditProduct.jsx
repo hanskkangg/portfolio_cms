@@ -21,34 +21,36 @@ const EditProduct = ({ token }) => {
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
   const [image4, setImage4] = useState(null);
-
   const fetchProductDetails = async () => {
     try {
-      const response = await axios.get(`${backendUrl}/api/product/single/${productId}`);
-      if (response.data.success) {
-        const prod = response.data.product;
-        setProduct(prod);
-        setName(prod.name);
-        setDescription(prod.description);
-        setPrice(prod.price);
-        setCategory(prod.category);
-        setSubCategory(prod.subCategory);
-        setBestseller(prod.bestseller);
-        setSizes(prod.sizes || []);  // ✅ Load sizes correctly
+        console.log(`Fetching: ${backendUrl}/api/product/single/${productId}`);
+        const response = await axios.get(`${backendUrl}/api/product/single/${productId}`);
 
-        if (prod.image && prod.image.length > 0) {
-          setImage1(prod.image[0] || null);
-          setImage2(prod.image[1] || null);
-          setImage3(prod.image[2] || null);
-          setImage4(prod.image[3] || null);
+        if (response.data.success) {
+            const prod = response.data.product;
+            setProduct(prod);
+            setName(prod.name);
+            setDescription(prod.description);
+            setPrice(prod.price);
+            setCategory(prod.category);
+            setSubCategory(prod.subCategory);
+            setBestseller(prod.bestseller);
+            setSizes(prod.sizes || []);  
+
+            if (prod.image && prod.image.length > 0) {
+                setImage1(prod.image[0] || null);
+                setImage2(prod.image[1] || null);
+                setImage3(prod.image[2] || null);
+                setImage4(prod.image[3] || null);
+            }
+        } else {
+            toast.error(response.data.message);
         }
-      } else {
-        toast.error(response.data.message);
-      }
     } catch (error) {
-      toast.error("Failed to fetch product details.");
+        console.error("Fetch error:", error);
+        toast.error("Failed to fetch product details.");
     }
-  };
+};
 
   useEffect(() => {
     fetchProductDetails();
