@@ -151,7 +151,16 @@ const Collection = () => {
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
           {
             filterProducts.map((item, index) => (
-              <ProductItem key={index} name={item.name} id={item._id} price={item.price} image={item.image} />
+              <div key={index} className="relative">
+                {/* 🔥 Bestseller Badge */}
+                {item.bestseller && (
+                  <span className="absolute top-2 left-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                    🔥 Bestseller
+                  </span>
+                )}
+                
+                <ProductItem name={item.name} id={item._id} price={item.price} image={item.image} />
+              </div>
             ))
           }
         </div>

@@ -26,11 +26,7 @@ const Product = () => {
   };
 
   useEffect(() => {
-
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    
     fetchProductData();
   }, [productId, products]);
 
@@ -57,7 +53,13 @@ const Product = () => {
           </div>
 
           {/* Large main product image */}
-          <div className='w-full sm:w-[80%]'>
+          <div className='w-full sm:w-[80%] relative'>
+            {/* 🔥 Bestseller Badge */}
+            {productData.bestseller && (
+              <span className="absolute top-2 left-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                🔥 Bestseller
+              </span>
+            )}
             <img className='w-full h-auto rounded-lg dark:border-gray-700' src={image} alt='' />
           </div>
 
@@ -65,6 +67,14 @@ const Product = () => {
 
         {/* Product Information Section */}
         <div className='flex-1'>
+
+          {/* 🔥 Bestseller Badge (Above Product Name) */}
+          {productData.bestseller && (
+            <div className="mb-2 text-xs font-bold text-yellow-500 bg-yellow-100 px-3 py-1 rounded-md w-fit shadow">
+              🔥 Bestseller
+            </div>
+          )}
+
           <h1 className='font-medium text-2xl mt-2 dark:text-gray-100'>{productData.name}</h1>
 
           {/* Product Ratings */}
@@ -85,23 +95,22 @@ const Product = () => {
 
           {/* Size Selection */}
           <div className='flex flex-col gap-4 my-8'>
-    <p>Select Size</p>
-    <div className='flex gap-2'>
-        {productData.sizes.map((item, index) => (
-            <button 
-                onClick={() => setSize(item)} 
-                className={`border py-2 px-4 
-                            bg-gray-100 dark:bg-gray-700 
-                            dark:border-gray-600 dark:text-white 
-                            ${item === size ? 'border-orange-500 bg-orange-500 text-white dark:bg-orange-600' : ''}`} 
-                key={index}
-            >
-                {item}
-            </button>
-        ))}
-    </div>
-</div>
-
+            <p>Select Size</p>
+            <div className='flex gap-2'>
+              {productData.sizes.map((item, index) => (
+                <button 
+                  onClick={() => setSize(item)} 
+                  className={`border py-2 px-4 
+                              bg-gray-100 dark:bg-gray-700 
+                              dark:border-gray-600 dark:text-white 
+                              ${item === size ? 'border-orange-500 bg-orange-500 text-white dark:bg-orange-600' : ''}`} 
+                  key={index}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
 
           {/* Add to Cart Button */}
           <button 
