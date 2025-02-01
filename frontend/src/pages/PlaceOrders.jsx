@@ -11,6 +11,8 @@ const PlaceOrders = () => {
     const [method, setMethod] = useState('cod');
     const { navigate, backendUrl, token, cartItems, setCartItems, getCartAmount, delivery_fee, products } = useContext(ShopContext);
 
+    const [showETransferPopup, setShowETransferPopup] = useState(false);
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -24,6 +26,14 @@ const PlaceOrders = () => {
         specialNote: ''
     });
 
+    const handlePaymentSelection = (paymentMethod) => {
+        setMethod(paymentMethod);
+
+        // ✅ Open modal only when E-Transfer is selected
+        if (paymentMethod === "etransfer") {
+            setShowETransferPopup(true);
+        }
+    };
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setFormData(data => ({ ...data, [name]: value }));
@@ -55,24 +65,25 @@ const PlaceOrders = () => {
             };
     
             switch (method) {
-                case "paypal":
+                /*case "paypal":
                     const responsePaypal = await axios.post(backendUrl + "/api/order/place", orderData, { headers: { token } });
                     if (responsePaypal.data.success) {
                         window.location.replace(responsePaypal.data.session_url);
                     } else {
                         toast.error(responsePaypal.data.message);
                     }
-                    break;
+                    break;*/
     
                 case "etransfer":
-                    const responseEtransfer = await axios.post(backendUrl + "/api/order/place", orderData, { headers: { token } });
-                    if (responseEtransfer.data.success) {
-                        setCartItems({});
-                        navigate("/orders");
-                    } else {
-                        toast.error(responseEtransfer.data.message);
-                    }
-                    break;
+                             // ✅ Place order without showing modal again
+                             const responseEtransfer = await axios.post(backendUrl + "/api/order/place", orderData, { headers: { token } });
+                             if (responseEtransfer.data.success) {
+                                 setCartItems({});
+                                 navigate("/orders");
+                             } else {
+                                 toast.error(responseEtransfer.data.message);
+                             }
+                             break;
     
                 case "cod":
                     const response = await axios.post(backendUrl + "/api/order/place", orderData, { headers: { token } });
@@ -92,9 +103,9 @@ const PlaceOrders = () => {
                         toast.error(responseStripe.data.message);
                     }
                     break;
-    
-                default:
-                    break;
+                    default:
+                        toast.error("Invalid payment method selected.");
+                        break;
             }
         } catch (error) {
             console.log(error);
@@ -155,46 +166,89 @@ const PlaceOrders = () => {
 
                     
 
-                    {/* --------------- Payment Method Selection ------------- */}
-                    
-                    
-                    <div className="lg:flex-row gap-4 mt-4">
+                {/* Payment Method Selection */}
+<div className="mt-6 space-y-4">
+    <h3 className="text-lg font-semibold text-gray-900">Select a Payment Method</h3>
 
+  {/* PayPal
+  <div 
+        onClick={() => setMethod('paypal')} 
+        className={`flex items-center gap-3 border p-4 cursor-pointer rounded-lg transition transform hover:scale-105 ${
+            method === 'paypal' ? 'border-green-500 bg-green-50 shadow-md' : 'border-gray-300'
+        }`}
+    >
+        <p className={`w-5 h-5 border rounded-full ${method === 'paypal' ? 'bg-green-400' : ''}`}></p>
+        <img className="w-10" src={assets.paypal_logo1} alt="PayPal" />
+        <p className="font-medium">PayPal</p>
+    </div>
+     */}
 
-                        
-  {/* PayPal */}
-  <div onClick={() => setMethod('paypal')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer dark:border-gray-700'>
-                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'paypal' ? 'bg-green-400' : ''}`}></p>
-                            <img className='min-w-24 h-8 ' src={assets.paypal_logo1} alt="" />
-                            <p>PAYPAL</p>
+    {/* Cash on Delivery */}
+    <div 
+        onClick={() => setMethod('cod')} 
+        className={`flex items-center gap-3 border p-4 cursor-pointer rounded-lg transition transform hover:scale-105 ${
+            method === 'cod' ? 'border-green-500 bg-green-50 shadow-md' : 'border-gray-300'
+        }`}
+    >
+        <p className={`w-5 h-5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
+        <p className="font-medium">Cash on Delivery</p>
+    </div>
+
+         
+                    {/* E-Transfer */}
+                    <div 
+        onClick={() => handlePaymentSelection('etransfer')} 
+        className={`flex items-center gap-3 border p-4 cursor-pointer rounded-lg transition transform hover:scale-105 ${
+            method === 'etransfer' ? 'border-green-500 bg-green-50 shadow-md' : 'border-gray-300'
+        }`}
+    >
+        <p className={`w-5 h-5 border rounded-full ${method === 'etransfer' ? 'bg-green-400' : ''}`}></p>
+        <p className="font-medium">E-Transfer</p>
+    </div>
+                   
+
+    {/* Credit / Debit Card */}
+    <div 
+        onClick={() => setMethod('stripe')} 
+        className={`flex items-center gap-3 border p-4 cursor-pointer rounded-lg transition transform hover:scale-105 ${
+            method === 'stripe' ? 'border-green-500 bg-green-50 shadow-md' : 'border-gray-300'
+        }`}
+    >
+        <p className={`w-5 h-5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
+        <img className="w-12" src={assets.visa_logo} alt="Visa / MasterCard" />
+        <p className="font-medium">MasterCard / Visa</p>
+    </div>
+
+    </div>
+                 
+
+                    {/* ✅ Improved Modal UI */}
+                    {showETransferPopup && (
+                        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-sm">
+                            <div className="bg-white w-[90%] max-w-md p-6 rounded-lg shadow-lg text-center animate-fadeIn">
+                                {/* Close Button */}
+                                <button onClick={() => setShowETransferPopup(false)} className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-xl font-bold">
+                                    ✕
+                                </button>
+                                <h2 className="text-2xl font-bold text-gray-900">📢 Payment Instructions</h2>
+<p className="text-md text-gray-700 mt-3">
+    To complete your order, please send a payment of <strong className="text-green-600">${getCartAmount() + delivery_fee}</strong> to the following email address:
+</p>
+<p className="text-lg font-bold text-blue-600 mt-2">hans.kkang@gmail.com</p>
+<p className="text-sm text-gray-600 mt-2">
+    Ensure that you include your order number in the payment notes for faster processing.
+</p>
+
+{/* Payment Confirmation Button */}
+<button onClick={() => setShowETransferPopup(false)} className="mt-6 bg-green-500 text-white px-6 py-3 rounded-md text-lg hover:bg-green-600 transition">
+    I Have Completed the Payment
+</button>
+                            </div>
                         </div>
+                    )}
 
-
-
-  {/* Stripe */}
-  <div onClick={() => setMethod('stripe')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer dark:border-gray-700'>
-                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
-                            <img className='min-w-24 h-10 ' src={assets.visa_logo} alt="" />
-                            <p>Master Card / VISA</p>
-                        </div>
-
-       
-
-  {/* Cash on Delivery */}
-  <div onClick={() => setMethod('cod')} className='flex items-center gap-3 border p-2 px-3 cursor-pointer dark:border-gray-700'>
-    <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
-    <p className='text-sm font-medium min-w-24 h-10'>Cash on Delivery</p>
-  </div>
-               
-                        {/* ✅ E-Transfer Option */}
-                        <div onClick={() => setMethod('etransfer')} className='flex items-center gap-3 border p-2 cursor-pointer'>
-                            <p className={`min-w-3.5 h-3.5 border rounded-full ${method === 'etransfer' ? 'bg-green-400' : ''}`}></p>
-                            <p>E-Transfer</p>
-                        </div></div>
-
-
-
-  <div className='w-full text-end mt-8'>
+                    {/* ✅ PLACE ORDER button */}
+                    <div className='w-full text-end mt-8'>
                         <button type='submit' 
                             className='bg-black text-white px-16 py-3 text-sm dark:bg-gray-700 dark:hover:bg-gray-600 transition-all rounded-md'>
                             PLACE ORDER
@@ -203,7 +257,7 @@ const PlaceOrders = () => {
                 </div>
             </div>
         </form>
-    )
-}
+    );
+};
 
-export default PlaceOrders
+export default PlaceOrders;
