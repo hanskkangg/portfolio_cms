@@ -3,25 +3,24 @@ import { listProducts, addProduct, removeProduct, singleProduct, updateProduct }
 import upload from '../middleware/multer.js';
 import adminAuth from '../middleware/adminAuth.js';
 
-const productRouter = express.Router();
+const productRoute = express.Router();
 
-// ✅ Corrected: Use `productRouter` instead of `router`
-productRouter.post('/update', adminAuth, upload.fields([
-    { name: 'image1', maxCount: 1 },
-    { name: 'image2', maxCount: 1 },
-    { name: 'image3', maxCount: 1 },
-    { name: 'image4', maxCount: 1 }
-]), updateProduct);
-
-productRouter.post('/add', adminAuth, upload.fields([
+productRoute.post('/add', adminAuth, upload.fields([
     { name: 'image1', maxCount: 1 },
     { name: 'image2', maxCount: 1 },
     { name: 'image3', maxCount: 1 },
     { name: 'image4', maxCount: 1 }
 ]), addProduct);
 
-productRouter.post('/remove', adminAuth, removeProduct);
-productRouter.post('/single', singleProduct);
-productRouter.get('/list', listProducts);
+productRoute.put('/update/:productId', adminAuth, upload.fields([
+    { name: 'image1', maxCount: 1 },
+    { name: 'image2', maxCount: 1 },
+    { name: 'image3', maxCount: 1 },
+    { name: 'image4', maxCount: 1 }
+]), updateProduct);
 
-export default productRouter;
+productRoute.post('/remove', adminAuth, removeProduct);
+productRoute.get('/single/:productId', singleProduct);
+productRoute.get('/list', listProducts);
+
+export default productRoute;

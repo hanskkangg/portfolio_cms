@@ -1,163 +1,175 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { backendUrl } from '../App';
-import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { assets } from '../assets/assets';
 
 const EditProduct = ({ token }) => {
-    const { productId } = useParams();
-    const navigate = useNavigate();
+  const { productId } = useParams();
+  const navigate = useNavigate();
 
-    const [product, setProduct] = useState({
-        name: '',
-        description: '',
-        price: '',
-        category: '',
-        subCategory: '',
-        bestseller: false,
-        sizes: [],
-        image: []
-    });
+  const [product, setProduct] = useState(null);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('');
+  const [subCategory, setSubCategory] = useState('');
+  const [bestseller, setBestseller] = useState(false);
+  const [sizes, setSizes] = useState([]);  // ✅ Fixed Sizes
+  const [image1, setImage1] = useState(null);
+  const [image2, setImage2] = useState(null);
+  const [image3, setImage3] = useState(null);
+  const [image4, setImage4] = useState(null);
 
-    const [newImages, setNewImages] = useState([]);
+  const fetchProductDetails = async () => {
+    try {
+      const response = await axios.get(`${backendUrl}/api/product/single/${productId}`);
+      if (response.data.success) {
+        const prod = response.data.product;
+        setProduct(prod);
+        setName(prod.name);
+        setDescription(prod.description);
+        setPrice(prod.price);
+        setCategory(prod.category);
+        setSubCategory(prod.subCategory);
+        setBestseller(prod.bestseller);
+        setSizes(prod.sizes || []);  // ✅ Load sizes correctly
 
-    // 🔹 Fetch product details
-    useEffect(() => {
-        const fetchProduct = async () => {
-            try {
-                const response = await axios.post(`${backendUrl}/api/product/single`, { productId });
-                if (response.data.success) {
-                    setProduct(response.data.product);
-                } else {
-                    toast.error(response.data.message);
-                }
-            } catch (error) {
-                console.log(error);
-                toast.error('Error fetching product details');
-            }
-        };
-
-        fetchProduct();
-    }, [productId]);
-
-    // 🔹 Handle input changes
-    const onChangeHandler = (e) => {
-        const { name, value } = e.target;
-        setProduct({ ...product, [name]: value });
-    };
-
-    // 🔹 Handle image selection
-    const handleImageChange = (e) => {
-        setNewImages([...e.target.files]);
-    };
-
-    // 🔹 Toggle size selection d d
-    const toggleSize = (size) => {
-        setProduct((prevProduct) => {
-            const updatedSizes = prevProduct.sizes.includes(size)
-                ? prevProduct.sizes.filter((s) => s !== size)
-                : [...prevProduct.sizes, size];
-
-            return { ...prevProduct, sizes: updatedSizes };
-        });
-    };
-
-    // 🔹 Submit updated product
-    const onSubmitHandler = async (e) => {
-        e.preventDefault();
-
-        try {
-            const formData = new FormData();
-            formData.append('productId', productId);
-            formData.append('name', product.name);
-            formData.append('description', product.description);
-            formData.append('price', product.price);
-            formData.append('category', product.category);
-            formData.append('subCategory', product.subCategory);
-            formData.append('bestseller', product.bestseller);
-            formData.append('sizes', JSON.stringify(product.sizes));
-
-            newImages.forEach((image, index) => {
-                formData.append(`image${index + 1}`, image);
-            });
-
-            const response = await axios.post(`${backendUrl}/api/product/update`, formData, { headers: { token } });
-
-            if (response.data.success) {
-                toast.success('Product updated successfully');
-                navigate('/list');
-            } else {
-                toast.error(response.data.message);
-            }
-        } catch (error) {
-            console.log(error);
-            toast.error('Error updating product');
+        if (prod.image && prod.image.length > 0) {
+          setImage1(prod.image[0] || null);
+          setImage2(prod.image[1] || null);
+          setImage3(prod.image[2] || null);
+          setImage4(prod.image[3] || null);
         }
-    };
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error("Failed to fetch product details.");
+    }
+  };
 
-    return (
-        <form onSubmit={onSubmitHandler} className="flex flex-col w-full items-start gap-3">
-            <h2 className="text-xl font-bold">Edit Product</h2>
+  useEffect(() => {
+    fetchProductDetails();
+  }, [productId]);
 
-            {/* Product Name */}
-            <label>Product Name</label>
-            <input type="text" name="name" value={product.name} onChange={onChangeHandler} required />
-
-            {/* Product Description */}
-            <label>Product Description</label>
-            <textarea name="description" value={product.description} onChange={onChangeHandler} required />
-
-            {/* Product Price */}
-            <label>Product Price ($)</label>
-            <input type="number" name="price" value={product.price} onChange={onChangeHandler} required />
-
-            {/* Product Category */}
-            <label>Category</label>
-            <select name="category" value={product.category} onChange={onChangeHandler}>
-                <option value="Men">Men</option>
-                <option value="Women">Women</option>
-                <option value="Kids">Kids</option>
-            </select>
-
-            {/* Sub-Category */}
-            <label>Sub-Category</label>
-            <select name="subCategory" value={product.subCategory} onChange={onChangeHandler}>
-                <option value="Topwear">Topwear</option>
-                <option value="Bottomwear">Bottomwear</option>
-                <option value="Winterwear">Winterwear</option>
-            </select>
-
-            {/* Bestseller Toggle */}
-            <label>
-                <input type="checkbox" checked={product.bestseller} onChange={() => setProduct({ ...product, bestseller: !product.bestseller })} />
-                Mark as Bestseller
-            </label>
-
-            {/* Product Sizes (Allow Selection) */}
-            <label>Product Sizes</label>
-            <div className="flex gap-3">
-                {['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-                    <div key={size} onClick={() => toggleSize(size)} className={`cursor-pointer px-3 py-1 rounded ${product.sizes.includes(size) ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}>
-                        {size}
-                    </div>
-                ))}
-            </div>
-
-            {/* Current Images */}
-            <label>Current Images</label>
-            <div className="flex gap-2">
-                {product.image.map((img, index) => (
-                    <img key={index} src={img} alt="Product" className="w-20 h-20 object-cover rounded" />
-                ))}
-            </div>
-
-            {/* Upload New Images */}
-            <label>Upload New Images (Optional)</label>
-            <input type="file" multiple onChange={handleImageChange} />
-
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Update Product</button>
-        </form>
+  const handleSizeSelection = (size) => {
+    setSizes((prev) =>
+      prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
     );
+  };
+
+  const handleUpdateProduct = async (e) => {
+    e.preventDefault();
+    try {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('description', description);
+        formData.append('price', Number(price));
+        formData.append('category', category);
+        formData.append('subCategory', subCategory);
+        formData.append('bestseller', bestseller ? "true" : "false");
+        formData.append('sizes', JSON.stringify(sizes)); // ✅ Send sizes as JSON string
+
+        // ✅ Ensure only new images are sent
+        if (image1 && typeof image1 === "object") formData.append('image1', image1);
+        if (image2 && typeof image2 === "object") formData.append('image2', image2);
+        if (image3 && typeof image3 === "object") formData.append('image3', image3);
+        if (image4 && typeof image4 === "object") formData.append('image4', image4);
+
+        const response = await axios.put(`${backendUrl}/api/product/update/${productId}`, formData, {
+            headers: { "Content-Type": "multipart/form-data", token },
+        });
+
+        if (response.data.success) {
+            toast.success("Product updated successfully!");
+            navigate('/list');
+        } else {
+            toast.error(response.data.message);
+        }
+    } catch (error) {
+        toast.error("Failed to update product.");
+    }
+};
+
+  return product ? (
+    <div className='p-6 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100'>
+      <h2 className='text-xl font-semibold mb-4 cursor-pointer'>Edit Product</h2>
+      <form onSubmit={handleUpdateProduct} className='flex flex-col gap-4'>
+
+{/* Upload Image Section */}
+<div className='flex gap-2'>
+  {[image1, image2, image3, image4].map((img, index) => (
+    <label key={index} htmlFor={`image${index + 1}`} className='cursor-pointer'>
+      <img
+        className='w-20 h-20 object-cover border dark:border-gray-600'
+        src={img && typeof img === "object" ? URL.createObjectURL(img) : img || assets.upload_area}
+        alt={`Upload Preview ${index + 1}`}
+      />
+      <input
+        type="file"
+        id={`image${index + 1}`}
+        hidden
+        onChange={(e) => {
+          const file = e.target.files[0];
+          if (file) {
+            const setter = [setImage1, setImage2, setImage3, setImage4][index];
+            setter(file);
+          }
+        }}
+      />
+    </label>
+  ))}
+</div>
+
+
+        {/* Product Name */}
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} className='w-full px-3 py-2 border dark:bg-gray-800 dark:text-white' required />
+
+        {/* Description */}
+        <textarea value={description} onChange={(e) => setDescription(e.target.value)} className='w-full px-3 py-2 border dark:bg-gray-800 dark:text-white' required />
+
+        {/* Price */}
+        <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className='w-full px-3 py-2 border dark:bg-gray-800 dark:text-white' required />
+
+        {/* Category & Subcategory */}
+        <div className='flex gap-3'>
+          <select value={category} onChange={(e) => setCategory(e.target.value)} className='px-3 py-2 border dark:bg-gray-800 dark:text-white'>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Kids">Kids</option>
+          </select>
+          <select value={subCategory} onChange={(e) => setSubCategory(e.target.value)} className='px-3 py-2 border dark:bg-gray-800 dark:text-white'>
+            <option value="Topwear">Topwear</option>
+            <option value="Bottomwear">Bottomwear</option>
+            <option value="Winterwear">Winterwear</option>
+          </select>
+        </div>
+
+        {/* Bestseller Checkbox */}
+        <div className='flex gap-2 mt-2'>
+          <input type="checkbox" checked={bestseller} onChange={() => setBestseller(!bestseller)} />
+          <label>Bestseller</label>
+        </div>
+
+        {/* Sizes Selection */}
+
+ <div>
+          <p className='mb-2'>Product Sizes</p>
+          <div className='flex gap-3'>
+            {["S", "M", "L", "XL", "XXL"].map(size => (
+              <div key={size} onClick={() => handleSizeSelection(size)}>
+                <p className={`${sizes.includes(size) ? "bg-pink-100" : "bg-slate-200"} px-3 py-1 cursor-pointer`}>{size}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <button type="submit" className='w-28 py-3 bg-black text-white dark:bg-gray-700'>Update</button>
+      </form>
+    </div>
+  ) : <p>Loading...</p>;
 };
 
 export default EditProduct;
