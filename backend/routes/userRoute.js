@@ -8,4 +8,4 @@ userRouter.post('/login',loginUser)
 userRouter.post('/admin',adminLogin)
 
 export default userRouter;
-// deplo
+// deployemn
