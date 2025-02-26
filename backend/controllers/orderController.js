@@ -6,7 +6,7 @@ import Stripe from 'stripe'
 const currency = 'cad'
 const deliveryCharge = 0
 
-// gateway initialize
+// gateway initializes
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 const placeOrder = async (req, res) => {
     try {

@@ -8,7 +8,7 @@ const CartTotal = () => {
 
     return (
         <div className='w-full'>
-            {/* Section title */}
+            {/* Section titles */}
             <div className='text-2xl'>
                 <Title text1={'CART'} text2={'TOTALS'} />
             </div>
