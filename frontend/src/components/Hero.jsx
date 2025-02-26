@@ -48,47 +48,51 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className='relative bg-[#fffff0] flex flex-col sm:flex-row items-start mt-10 overflow-hidden'>
+    <div 
+      className="relative flex flex-col sm:flex-row items-start overflow-hidden min-h-screen bg-center"
+      style={{ 
+        backgroundImage: `url(${assets.bg_})`, 
+        backgroundSize: '100%', // Adjust the size of the background image
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center'
+      }} 
+    >
 
-      {/* Hero Left Side - All Text Aligned to the Left */}
-      <div className='w-full sm:w-1/2 flex flex-col items-start justify-end p-4'>
+      {/* Hero Left Side - Text aligned to the left and close to the image */}
+      <div className='w-full sm:w-1/2 flex flex-col items-start justify-center p-4 min-h-[600px] bg-white bg-opacity-0'>
         <div className='text-[#414141] text-left'>
-          
-          {/* Fancy Welcome Text with Spectral Font */}
-          <h2
-    className={`text-6xl lg:text-7xl font-semibold text-[#414141] mb-6 ml-10 mt-20 transition-all duration-1000 ease-out grape-nuts-font ${
-        animateText && !slideUp
-            ? 'translate-y-0 opacity-100'
-            : '-translate-y-full opacity-0'
-    }`}
->
-    Welcome,
-</h2>
-
-
 
           {/* Main Heading with Slide Down and Slide Up Animation */}
           <h1
-            className={`prata-regular text-5xl sm:text-6xl lg:text-7xl leading-snug font-semibold text-[#414141] dark:text-gray-50 mb-8 ml-10 mt-20 transition-all duration-1000 ease-out ${
+            className={`prata-regular text-5xl sm:text-6xl lg:text-7xl leading-snug font-semibold text-[#414141] dark:text-gray-50 mb-4 transition-all duration-1000 ease-out ml-10 ${
               animateText && !slideUp
                 ? 'translate-y-0 opacity-100'
                 : '-translate-y-full opacity-0'
             }`}
           >
-            BAEYONDNAILS<br />
-            ART AND<br />
-            DESIGN
+            BAEYOND NAILS
           </h1>
+
+          <h2
+            className={`text-4xl sm:text-5xl lg:text-6xl leading-snug font-semibold text-[#414141] dark:text-gray-50 mb-2 transition-all duration-1000 ease-out ml-10 ${
+              animateText && !slideUp
+                ? 'translate-y-0 opacity-100'
+                : '-translate-y-full opacity-0'
+            }`}
+          >
+            ART AND DESIGN
+          </h2>
 
           {/* Secondary Description with Slide Down and Slide Up Animation */}
           <p
-            className={`text-sm sm:text-base md:text-lg text-[#414141] dark:text-gray-300 max-w-md ml-10 mt-10 transition-all duration-1000 ease-out delay-200 ${
+            className={`text-sm sm:text-base md:text-lg text-[#414141] dark:text-gray-300 max-w-md transition-all duration-1000 ease-out delay-200 ml-10 ${
               animateText && !slideUp
                 ? 'translate-y-0 opacity-100'
                 : '-translate-y-full opacity-0'
             }`}
           >
-            Based in Ottawa, we're happy to bring your creative nail art ideas to life. Join us for a day of inspiration and artistry.
+            Based in Ottawa, we're happy to bring your creative nail art ideas to life.
+            Join us for a day of inspiration and artistry.
           </p>
 
         </div>
@@ -96,11 +100,11 @@ const Hero = () => {
 
       {/* Hero Right Side with fixed image container and slower animation */}
       <div 
-        className='w-full sm:w-1/2 h-[620px] overflow-hidden relative flex items-center justify-center'
+        className='w-full sm:w-1/2 h-[660px] overflow-hidden relative flex items-center justify-center'
         onMouseEnter={() => setIsPaused(true)} 
         onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="w-[100%] h-[100%] flex items-center justify-center">
+        <div className="w-[90%] h-[90%] flex items-center justify-center">
           <img 
               className='w-full h-full object-cover cursor-pointer transition-all duration-3000 ease-in-out rounded-3xl' 
               src={imageArray[currentImageIndex]} 
@@ -115,7 +119,7 @@ const Hero = () => {
                 <div
                     key={index}
                     onClick={() => handleDotClick(index)}
-                    className={`w-2 h-2 rounded-full cursor-pointer transition-all ${
+                    className={`w-1 h-1 rounded-full cursor-pointer transition-all ${
                         index === currentImageIndex
                         ? 'bg-gray-800 dark:bg-gray-200 scale-110'
                         : 'bg-gray-400 dark:bg-gray-500'
