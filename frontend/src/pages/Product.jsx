@@ -77,15 +77,16 @@ const Product = () => {
 
           <h1 className='font-medium text-2xl mt-2 dark:text-gray-100'>{productData.name}</h1>
 
-          {/* Product Ratings */}
+          {/* Product Ratings
           <div className='flex items-center gap-1 mt-2'>
             <img src={assets.star_icon} alt='' className='w-3.5 dark:invert' />
             <img src={assets.star_icon} alt='' className='w-3.5 dark:invert' />
             <img src={assets.star_icon} alt='' className='w-3.5 dark:invert' />
             <img src={assets.star_icon} alt='' className='w-3.5 dark:invert' />
             <img src={assets.star_dull_icon} alt='' className='w-3.5 dark:invert' />
-            <p className='pl-2'>(122)</p>
-          </div>
+            {/* <p className='pl-2'>(122)</p> */}
+            {/* </div> */}
+          
 
           {/* Product Price */}
           <p className='mt-5 text-3xl font-medium dark:text-gray-100'>{currency}{productData.price}</p>
