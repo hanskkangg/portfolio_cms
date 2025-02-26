@@ -20,7 +20,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
     };
 
     return (
-        <div className='flex items-center justify-between py-2 font-medium  bg-[#fffff0]  dark:bg-gray-900 dark:text-white transition-colors duration-300 px-5'>
+        <div className='flex items-center justify-between py-2 font-medium  bg-[#FFF9F2]  dark:bg-gray-900 dark:text-white transition-colors duration-300 px-5 opacity-100'>
             <Link to='/'>
                 <img 
                    src={isDarkMode ? assets.baeyondnail : assets.baeyondnail} 
