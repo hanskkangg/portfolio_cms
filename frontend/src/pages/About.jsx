@@ -19,7 +19,7 @@ const About = () => {
               <p className=' dark:text-gray-400'>Like A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It Off
               </p>
 
-              <p className='dark:text-gray-400'>LUQMAN AJMAL Institute is a self- financial co-education institute dedicated to the training of medical and Vocational Training related courses.LUQMAN AJMAL Institute is a self- financial co-education institute dedicated to the training of medical and Vocational Training related courses.</p>
+              <p className='dark:text-gray-400'>Baeyondnails Institute is a self- financial co-education institute dedicated to the training of medical and Vocational Training related courses.LUQMAN AJMAL Institute is a self- financial co-education institute dedicated to the training of medical and Vocational Training related courses.</p>
 
 
               <b className='text-gray-800  dark:text-gray-200'>Our Mission</b>

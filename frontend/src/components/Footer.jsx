@@ -9,7 +9,7 @@ const Footer = ({ isDarkMode }) => {
        {/* Logo & Description */}
        <div>
           <img  
-            src={isDarkMode ? assets.hans_logo1 : assets.hans_logo2} 
+            src={isDarkMode ?assets.baeyondnail : assets.baeyondnail} 
             className='mb-5 w-20 transition-all duration-300' 
             alt="Hans Kang Logo" 
           />

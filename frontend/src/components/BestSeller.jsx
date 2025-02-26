@@ -12,8 +12,10 @@ const BestSeller = () => {
     setBestSellers(bestProduct.slice(0, 5));
   }, [products]);
 
+  
   return (
-    <div className='my-10 bg-[#F9E6E4] dark:bg-gray-900 transition-colors duration-300 pb-20'>
+    <div className='my-10 bg-[#F9E6E4] dark:bg-gray-900 transition-colors duration-300 pb-20 pt-20'>
+
       {/* Title Section */}
       <div className='text-center py-8 dark:text-white'>
                 

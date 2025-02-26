@@ -50,14 +50,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
 
             <div className='flex items-center gap-6'>
                 {/* ✅ Dark Mode Toggle Button */}
-                <button onClick={toggleDarkMode}>
-                    <img 
-                        src={isDarkMode ? assets.sun_icon : assets.moon_icon} 
-                        alt='Toggle Dark Mode' 
-                        className='w-6 cursor-pointer' 
-                    />
-                </button>
-
+                
                 {/* ✅ Search Icon - Apply `dark:invert` */}
                 <img 
                     onClick={() => { setShowSearch(true); navigate('/collection'); }} 

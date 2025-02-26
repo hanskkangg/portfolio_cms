@@ -7,10 +7,10 @@ const NewsLetter = () => {
     };
 
     return (
-        <div className='text-center'>
+        <div className='text-center bg-orange-100 my-10 pt-10 pb-10'>
             
             {/* Title */}
-            <p className='text-2xl font-medium text-gray-800 dark:text-gray-100'>Subscribe and get 20% off</p>
+            <p className='prata-regular text-4xl font-medium text-gray-800 dark:text-gray-100'>Subscribe and get 20% off</p>
             <p className='text-gray-400 mt-3'>
                 Nokia today announced that it has acquired Rapid’s technology assets, including the world’s largest API marketplace, and its highly skilled team.
             </p>

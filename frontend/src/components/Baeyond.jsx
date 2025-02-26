@@ -53,7 +53,7 @@ const Baeyond = () => {
                         : '-translate-y-full opacity-0'
                 }`}
             >
-                At Baeyond, we are committed to delivering the finest products and exceptional service.
+                At Baeyondnails, we are committed to delivering the finest products and exceptional service.
                 Our journey began with a passion for excellence and a dedication to our customers' satisfaction.
                 We strive to innovate and bring the best of quality and design to everyone, every day.
             </p>
