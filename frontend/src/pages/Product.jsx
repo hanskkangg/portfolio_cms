@@ -155,7 +155,7 @@ const Product = () => {
       </div>
 
       {/* Description & Review Section */}
-      <div className='mt-20'>
+      {/* <div className='mt-20'>
         <div className='flex border-gray-300 dark:border-gray-700'>
           <b className='border px-5 py-3 text-sm dark:text-white dark:border-gray-700'>Description</b>
           <p className='border px-5 py-3 text-sm dark:text-white dark:border-gray-700'>Reviews (122)</p>
@@ -168,7 +168,7 @@ const Product = () => {
             I’m currently diving into frameworks like React, which I plan to implement here as I learn.
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* Display Related Products */}
       <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
