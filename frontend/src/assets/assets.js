@@ -106,6 +106,7 @@ import n17 from './n17.jpg'
 import n18 from './n18.jpg'
 import n19 from './n19.jpg'
 import n20 from './n20.jpg'
+import n21 from './n21.png'
 
 
 export const assets = {
@@ -160,7 +161,8 @@ export const assets = {
     n17,
     n18,
     n19,
-    n20
+    n20,
+    n21
 }
 
 

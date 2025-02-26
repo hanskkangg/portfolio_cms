@@ -2,21 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { assets } from '../assets/assets';
 
 const Hero = () => {
-  // Image assets array for easy management
   const imageArray = [assets.n17, assets.n18, assets.n20, assets.n19];
   
-  // State to track the current image index
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // State to control whether animation is paused
   const [isPaused, setIsPaused] = useState(false);
+  const [animateText, setAnimateText] = useState(false);
+  const [slideUp, setSlideUp] = useState(false);
 
-  // Function to handle image click and cycle through the images
   const handleImageClick = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageArray.length);
   };
 
-  // Automatic image transition every 5 seconds (5000 ms)
   useEffect(() => {
     if (!isPaused) {
       const interval = setInterval(() => {
@@ -27,27 +23,71 @@ const Hero = () => {
     }
   }, [isPaused, imageArray.length]);
 
-  // Function to handle dot click
   const handleDotClick = (index) => {
     setCurrentImageIndex(index);
   };
 
+  useEffect(() => {
+    setAnimateText(true);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const triggerPoint = 200; 
+
+      if (scrollPosition > triggerPoint) {
+        setSlideUp(true);
+      } else {
+        setSlideUp(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className='relative bg-[#fffff0] flex flex-col sm:flex-row items-start mt-10'>
+    <div className='relative bg-[#fffff0] flex flex-col sm:flex-row items-start mt-10 overflow-hidden'>
 
-      {/* Hero Left Side */}
-      <div className='w-full sm:w-1/2 flex flex-col items-end justify-end p-4'>
-        <div className='text-[#414141] text-right'>
+      {/* Hero Left Side - All Text Aligned to the Left */}
+      <div className='w-full sm:w-1/2 flex flex-col items-start justify-end p-4'>
+        <div className='text-[#414141] text-left'>
+          
+          {/* Fancy Welcome Text with Spectral Font */}
+          <h2
+    className={`text-6xl lg:text-7xl font-semibold text-[#414141] mb-6 ml-10 mt-20 transition-all duration-1000 ease-out grape-nuts-font ${
+        animateText && !slideUp
+            ? 'translate-y-0 opacity-100'
+            : '-translate-y-full opacity-0'
+    }`}
+>
+    Welcome,
+</h2>
 
-          {/* Main Heading */}
-          <h1 className='prata-regular text-5xl sm:text-6xl lg:text-7xl leading-snug font-extrabold text-[#414141] dark:text-gray-50 mb-8 mr-1'>
-            BAEYOND<br/>
-            NAIL ART<br/>
-            DESIGNS
+
+
+          {/* Main Heading with Slide Down and Slide Up Animation */}
+          <h1
+            className={`prata-regular text-5xl sm:text-6xl lg:text-7xl leading-snug font-semibold text-[#414141] dark:text-gray-50 mb-8 ml-10 mt-20 transition-all duration-1000 ease-out ${
+              animateText && !slideUp
+                ? 'translate-y-0 opacity-100'
+                : '-translate-y-full opacity-0'
+            }`}
+          >
+            BAEYONDNAILS<br />
+            ART AND<br />
+            DESIGN
           </h1>
 
-          {/* Secondary Description */}
-          <p className='text-sm sm:text-base md:text-lg text-[#414141] dark:text-gray-300 max-w-md mr-1'>
+          {/* Secondary Description with Slide Down and Slide Up Animation */}
+          <p
+            className={`text-sm sm:text-base md:text-lg text-[#414141] dark:text-gray-300 max-w-md ml-10 mt-10 transition-all duration-1000 ease-out delay-200 ${
+              animateText && !slideUp
+                ? 'translate-y-0 opacity-100'
+                : '-translate-y-full opacity-0'
+            }`}
+          >
             Based in Ottawa, we're happy to bring your creative nail art ideas to life. Join us for a day of inspiration and artistry.
           </p>
 
@@ -56,11 +96,11 @@ const Hero = () => {
 
       {/* Hero Right Side with fixed image container and slower animation */}
       <div 
-        className='w-full sm:w-1/2 h-[600px] overflow-hidden relative mb-12 flex items-center justify-center'
-        onMouseEnter={() => setIsPaused(true)} // Pause animation on hover
-        onMouseLeave={() => setIsPaused(false)} // Resume animation when hover is removed
+        className='w-full sm:w-1/2 h-[620px] overflow-hidden relative flex items-center justify-center'
+        onMouseEnter={() => setIsPaused(true)} 
+        onMouseLeave={() => setIsPaused(false)}
       >
-        <div className="w-[90%] h-[100%] flex items-center justify-center">
+        <div className="w-[100%] h-[100%] flex items-center justify-center">
           <img 
               className='w-full h-full object-cover cursor-pointer transition-all duration-3000 ease-in-out rounded-3xl' 
               src={imageArray[currentImageIndex]} 
