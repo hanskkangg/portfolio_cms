@@ -34,7 +34,7 @@ const App = () => {
 
   useEffect(() => {
     const createSparkle = () => {
-      for (let i = 0; i < 3; i++) {  // Create TWO sparkles at a time (double amount)
+      for (let i = 0; i < 5; i++) {  // Create TWO sparkles at a time (double amount)
         const sparkle = document.createElement("div");
         sparkle.classList.add("sparkle");
         document.body.appendChild(sparkle);

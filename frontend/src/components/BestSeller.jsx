@@ -14,7 +14,7 @@ const BestSeller = () => {
 
   
   return (
-    <div className='my-10 bg-[#Ffffff] dark:bg-gray-900 transition-colors duration-300 pb-20 pt-20'>
+    <div className='my-10 bg-[#Ffffff] dark:bg-gray-900 transition-colors duration-300 pb-20'>
 
       {/* Title Section */}
       <div className='text-center py-8 dark:text-white'>
