@@ -13,10 +13,10 @@ const ProductItem = ({ id, image, name, price }) => {
             onMouseEnter={() => setHover(true)}  // ✅ Detect hover enter
             onMouseLeave={() => setHover(false)} // ✅ Detect hover leave
         >
-            {/* ✅ Image container with hover effect */}
-            <div className='overflow-hidden'>
+            {/* ✅ Image container with fixed size */}
+            <div className='w-full h-[300px] overflow-hidden flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg'>
                 <img 
-                    className='w-full transition-transform duration-300 ease-in-out'
+                    className='w-full h-full object-cover transition-transform duration-300 ease-in-out' // ✅ Keep consistent size
                     src={hover && image[1] ? image[1] : image[0]} // ✅ Show second image if available
                     alt={name} 
                 />
