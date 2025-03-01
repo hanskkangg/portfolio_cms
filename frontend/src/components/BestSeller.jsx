@@ -20,7 +20,7 @@ const BestSeller = () => {
       <div className='text-center py-8 dark:text-white'>
                 
                 {/* Title with Grape Nuts Font and Bigger Size */}
-                <h2 className=' prata-regular text-4xl md:text-3xl font-bold text-[#414141] mb-4'>
+                <h2 className=' prata-regular text-4xl md:text-3xl font-bold text-[#414141] mb-1'>
                   - BEST SELLERS -
                 </h2>
                 
