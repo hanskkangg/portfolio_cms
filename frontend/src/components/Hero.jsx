@@ -57,10 +57,10 @@
 
     {/* Shop Now Button - Positioned Lower */}
     <button 
-      className="absolute bottom-40 px-8 py-3 text-lg font-semibold border-2 border-white bg-transparent text-white shadow-lg transition-all duration-300 hover:bg-white hover:text-black hover:scale-105"
+      className="absolute bottom-40 px-8 py-3 text-sm  border-2 border-white bg-transparent text-white shadow-lg transition-all duration-300 hover:bg-white hover:text-black hover:scale-105"
       onClick={() => navigate('/collection')}
     >
-      Shop Now
+      SHOP NOW
     </button>
   </div>
       </div>
