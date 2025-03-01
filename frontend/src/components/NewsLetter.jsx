@@ -7,7 +7,7 @@ const NewsLetter = () => {
     };
 
     return (
-        <div className='text-center bg-orange-100 my-10 pt-10 pb-10'>
+        <div className='text-center bg-white my-10 pt-10 pb-10'>
             
             {/* Title */}
             <p className='prata-regular text-4xl font-medium text-gray-800 dark:text-gray-100'>Subscribe and get 20% off</p>

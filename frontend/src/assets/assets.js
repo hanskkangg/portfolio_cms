@@ -108,6 +108,8 @@ import n19 from './n19.jpg'
 import n20 from './n20.jpg'
 import n21 from './n21.png'
 import bg_ from './bg_.png'
+import bg_1 from './bg_1.jpg'
+
 
 
 export const assets = {
@@ -164,7 +166,8 @@ export const assets = {
     n19,
     n20,
     n21,
-    bg_
+    bg_,
+    bg_1
 }
 
 

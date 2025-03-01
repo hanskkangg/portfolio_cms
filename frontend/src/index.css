@@ -42,3 +42,26 @@ a.active hr {
 .grape-nuts-font {
     font-family: 'Grape Nuts', cursive;
 }
+
+
+.sparkle {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  opacity: 1;
+  animation: sparkle-fall 3s linear forwards;
+}
+
+@keyframes sparkle-fall {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh);
+  }
+}

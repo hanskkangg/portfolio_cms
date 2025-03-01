@@ -15,7 +15,7 @@ const Home = () => {
       {/* Whenever we open home we import the hero component */}  
 
       <Hero/>
-      <Baeyond/>
+      {/* <Baeyond/> */}
       <LatestCollection/>
       <BestSeller/>
       <Policy/>
