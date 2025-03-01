@@ -2,39 +2,41 @@ import React, { useContext, useState } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import { Link } from 'react-router-dom';
 
-const ProductItem = ({ id, image, name, price }) => {
+const ProductItem = ({ id, image, name, price, bestseller }) => {
     const { currency } = useContext(ShopContext);
-    const [hover, setHover] = useState(false); // ✅ Track hover state
+    const [hover, setHover] = useState(false);
 
     return (
         <Link 
-            className={`text-gray-700 cursor-pointer dark:text-gray-100 transition-all duration-300 ease-in-out 
-                ${hover ? 'translate-y-[-10px]' : 'translate-y-0 '}
-            `}
+            className={`relative text-gray-700 cursor-pointer dark:text-gray-100 transition-all duration-300 ease-in-out 
+                ${hover ? 'translate-y-[-10px]' : 'translate-y-0'}`}
             to={`/product/${id}`}
-            onMouseEnter={() => setHover(true)}  // ✅ Detect hover enter
-            onMouseLeave={() => setHover(false)} // ✅ Detect hover leave
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
         >
-            {/* ✅ Image container with hover effects */}
-            <div className='w-full h-[300px] overflow-hidden flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg relative'>
-                
-                {/* ✅ Image with smooth transition */}
+            {/* ✅ Image Container */}
+            <div className='relative w-full h-[300px] overflow-hidden flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg'>
+
+                {/* 🔥 Bestseller Badge (Positioned Lower) */}
+                {bestseller && (
+                    <span className="absolute top-5 left-3 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-widest z-10">
+                        🔥 Bestseller
+                    </span>
+                )}
+
+                {/* ✅ Image with Hover Effect */}
                 <img 
                     className={`w-full h-full object-cover transition-all duration-500 ease-in-out 
-                        ${hover ? 'scale-105 brightness-110' : 'scale-100'}
-                    `}
-                    src={hover && image[1] ? image[1] : image[0]} // ✅ Show second image on hover
+                        ${hover ? 'scale-105 brightness-110' : 'scale-100'}`}
+                    src={hover && image[1] ? image[1] : image[0]} 
                     alt={name} 
                 />
-
-                {/* ✅ Overlay Effect (Optional) */}
-                <div 
-                    className={`absolute inset-0 bg-black bg-opacity-10 transition-opacity duration-500 ${hover ? 'opacity-50' : 'opacity-0'}`}
-                ></div>
             </div>
 
-            {/* ✅ Product Name & Price */}
+            {/* ✅ Product Name */}
             <p className='pt-3 pb-1 text-md text-black dark:text-gray-50'>{name}</p>
+
+            {/* ✅ Product Price */}
             <p className='text-sm font-medium dark:text-gray-300'>{currency} {price}</p>
         </Link>
     );

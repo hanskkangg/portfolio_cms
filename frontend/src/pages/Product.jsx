@@ -155,6 +155,13 @@ const Product = () => {
         </div>
       </div>
 
+{/* ✅ Bestseller Badge (Above Product Name) */}
+{productData.bestseller && (
+    <div className="mb-2 text-xs font-bold text-yellow-500 bg-yellow-100 px-3 py-1 rounded-md w-fit shadow">
+        🔥 Bestseller
+    </div>
+)}
+
       {/* Description & Review Section */}
       {/* <div className='mt-20'>
         <div className='flex border-gray-300 dark:border-gray-700'>

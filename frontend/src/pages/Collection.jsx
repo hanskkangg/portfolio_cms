@@ -158,8 +158,16 @@ const Collection = () => {
                     🔥 Bestseller
                   </span>
                 )}
-                
-                <ProductItem name={item.name} id={item._id} price={item.price} image={item.image} />
+
+            <ProductItem 
+    name={item.name} 
+    id={item._id} 
+    price={item.price} 
+    image={item.image} 
+    bestseller={item.bestseller} // ✅ Ensure bestseller is passed
+/>
+
+
               </div>
             ))
           }
