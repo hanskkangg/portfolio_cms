@@ -2,11 +2,11 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { backendUrl, currency } from '../App';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'; // 🔹 Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const List = ({ token }) => {
   const [list, setList] = useState([]);
-  const navigate = useNavigate(); // 🔹 Initialize useNavigate
+  const navigate = useNavigate();
 
   const fetchList = async () => {
     try {
@@ -52,22 +52,22 @@ const List = ({ token }) => {
             key={index} 
             className="relative bg-white shadow-md rounded-lg p-4 border border-gray-200 flex flex-col items-center text-center hover:shadow-lg transition duration-300"
           >
-            {/* 🔥 Bestseller Badge */}
+            {/* Bestseller Badge */}
             {item.bestseller && (
               <span className="absolute top-2 right-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">
                 🔥 Bestseller
               </span>
             )}
 
-            {/* 🖼️ Product Image */}
+            {/* Product Image */}
             <img className="w-24 h-24 object-cover rounded-md border" src={item.image[0]} alt={item.name} />
 
-            {/* 📝 Product Details */}
+            {/* Product Details */}
             <h3 className="text-lg font-semibold mt-2 text-gray-700">{item.name}</h3>
             <p className="text-sm text-gray-500">{item.category}</p>
             <p className="text-md font-semibold text-gray-800 mt-1">{currency}{item.price}</p>
 
-            {/* 🛠️ Action Buttons */}
+            {/* Action Buttons */}
             <div className="flex gap-4 mt-3">
               <button 
                 onClick={() => navigate(`/edit/${item._id}`)}

@@ -8,9 +8,9 @@ const productSchema = new mongoose.Schema({
     category: { type: String, required: true }, 
     subCategory: { type: String, required: true }, 
     sizes: { type: Array, required: true }, 
-    bestseller: { type: Boolean, default: false }, // ✅ Ensure default is set
+    bestseller: { type: Boolean, default: false }, 
     date: { type: Number, required: true }
-}, { timestamps: true }); // ✅ Enable timestamps
+}, { timestamps: true }); 
 
 const productModels = mongoose.models.product || mongoose.model("product", productSchema);
 

@@ -3,7 +3,7 @@ import { ShopContext } from '../context/ShopContext'
 import Title from '../components/Title';
 import { assets } from '../assets/assets';
 import CartTotal from '../components/CartTotal';
-import { toast } from "react-toastify"; // ✅ Import toast
+import { toast } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
@@ -29,7 +29,7 @@ const Cart = () => {
     }
   }, [cartItems, products]);
 
-  // ✅ Function to handle item removal with Undo option
+  // Function to handle item removal with Undo option
   const handleRemoveItem = (productId, size) => {
     const removedItem = {
       _id: productId,
@@ -37,18 +37,18 @@ const Cart = () => {
       quantity: cartItems[productId][size],
     };
 
-    // ✅ Remove item from cart
+    //  Remove item from cart
     updateQuantity(productId, size, 0);
 
-    // ✅ Show toast notification with "Undo" button
+    // Show toast notification with "Undo" button
     const toastId = toast.error(
       <div className="text-center text-black">
         ❌ Item has been removed from your cart!
         <br />
         <button 
           onClick={() => {
-            updateQuantity(productId, size, removedItem.quantity); // ✅ Restore item
-            toast.dismiss(toastId); // ✅ Remove toast notification
+            updateQuantity(productId, size, removedItem.quantity);
+            toast.dismiss(toastId); 
           }} 
           className="bg-blue-500 text-white px-3 py-1 rounded text-xs mt-2"
         >

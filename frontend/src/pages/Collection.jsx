@@ -12,7 +12,7 @@ const Collection = () => {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relavent');
-  const [bestseller, setBestseller] = useState(false); // ✅ Bestseller State
+  const [bestseller, setBestseller] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,7 +47,7 @@ const Collection = () => {
       productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
     }
 
-    // ✅ Apply Bestseller Filter
+    // Apply Bestseller Filter
     if (bestseller) {
       productsCopy = productsCopy.filter(item => item.bestseller === true);
     }
@@ -90,7 +90,7 @@ const Collection = () => {
         </p>
 
 
-    {/* ✅ Bestseller Filter Section */}
+    {/* Bestseller Filter Section */}
     <div className={`border border-gray-300 dark:border-gray-600 pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'} sm:block`}>
           <p className='mb-3 text-sm font-medium dark:text-gray-300'>BESTSELLER</p>
           <div className='flex gap-2 text-sm font-light text-gray-700 dark:text-gray-400'>
@@ -152,7 +152,7 @@ const Collection = () => {
           {
             filterProducts.map((item, index) => (
               <div key={index} className="relative">
-                {/* 🔥 Bestseller Badge */}
+                {/* Bestseller Badge */}
                 {item.bestseller && (
                   <span className="absolute top-2 left-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
                     🔥 Bestseller
@@ -164,7 +164,7 @@ const Collection = () => {
     id={item._id} 
     price={item.price} 
     image={item.image} 
-    bestseller={item.bestseller} // ✅ Ensure bestseller is passed
+    bestseller={item.bestseller} 
 />
 
 

@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema({
         required: true,
         set: value => value.toLowerCase() === 'cod' ? 'Cash on Delivery' 
                : value.toLowerCase() === 'etransfer' ? 'E-Transfer' 
-               : value // ✅ Auto-format method names when saving
+               : value
     },
     payment: { type: Boolean, required: true , default: false },
     date: {type: Number, required:true}

@@ -54,7 +54,7 @@ const Product = () => {
 
           {/* Large main product image */}
           <div className='w-full sm:w-[80%] relative'>
-            {/* 🔥 Bestseller Badge */}
+            {/* Bestseller Badge */}
             {productData.bestseller && (
               <span className="absolute top-2 left-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
                 🔥 Bestseller
@@ -68,7 +68,7 @@ const Product = () => {
         {/* Product Information Section */}
         <div className='flex-1'>
 
-          {/* 🔥 Bestseller Badge (Above Product Name) */}
+          {/* Bestseller Badge (Above Product Name) */}
           {productData.bestseller && (
             <div className="mb-2 text-xs font-bold text-yellow-500 bg-yellow-100 px-3 py-1 rounded-md w-fit shadow">
               🔥 Bestseller
@@ -155,7 +155,7 @@ const Product = () => {
         </div>
       </div>
 
-{/* ✅ Bestseller Badge (Above Product Name) */}
+{/* Bestseller Badge (Above Product Name) */}
 {productData.bestseller && (
     <div className="mb-2 text-xs font-bold text-yellow-500 bg-yellow-100 px-3 py-1 rounded-md w-fit shadow">
         🔥 Bestseller

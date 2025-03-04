@@ -44,8 +44,7 @@
     <div className="absolute inset-0 z-0"></div>
 
     {/* Main Title */}
-   {/* Main Title
-<h1 className="relative z-30 text-[80px] md:text-[150px] font-bold leading-none mb-4 text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]">
+{/* <h1 className="relative z-30 text-[80px] md:text-[150px] font-bold leading-none mb-4 text-white drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]">
   BAEYOND NAILS
 </h1> */}
 
@@ -53,7 +52,7 @@
     {/* Subtitle */}
     {/* <p className="relative z-30 text-lg md:text-2xl max-w-2xl drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]">
       Enhance your own light in the soft embrace of gentle glow
-    </p> */}
+    </p>  */}
 
     {/* Shop Now Button - Positioned Lower */}
     <button 

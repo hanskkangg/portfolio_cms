@@ -16,7 +16,7 @@ const EditProduct = ({ token }) => {
   const [category, setCategory] = useState('');
   const [subCategory, setSubCategory] = useState('');
   const [bestseller, setBestseller] = useState(false);
-  const [sizes, setSizes] = useState([]);  // ✅ Fixed Sizes
+  const [sizes, setSizes] = useState([]); 
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
@@ -72,9 +72,9 @@ const EditProduct = ({ token }) => {
         formData.append('category', category);
         formData.append('subCategory', subCategory);
         formData.append('bestseller', bestseller ? "true" : "false");
-        formData.append('sizes', JSON.stringify(sizes)); // ✅ Send sizes as JSON string
+        formData.append('sizes', JSON.stringify(sizes)); 
 
-        // ✅ Ensure only new images are sent
+        // Ensure only new images are sent
         if (image1 && typeof image1 === "object") formData.append('image1', image1);
         if (image2 && typeof image2 === "object") formData.append('image2', image2);
         if (image3 && typeof image3 === "object") formData.append('image3', image3);

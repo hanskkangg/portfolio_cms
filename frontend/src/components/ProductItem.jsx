@@ -14,17 +14,17 @@ const ProductItem = ({ id, image, name, price, bestseller }) => {
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
-            {/* ✅ Image Container */}
+            {/* Image Container */}
             <div className='relative w-full h-[300px] overflow-hidden flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg'>
 
-                {/* 🔥 Bestseller Badge (Positioned Lower) */}
+                {/* Bestseller Badge (Positioned Lower) */}
                 {bestseller && (
                     <span className="absolute top-5 left-3 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-widest z-10">
                         🔥 Bestseller
                     </span>
                 )}
 
-                {/* ✅ Image with Hover Effect */}
+                {/* Image with Hover Effect */}
                 <img 
                     className={`w-full h-full object-cover transition-all duration-500 ease-in-out 
                         ${hover ? 'scale-105 brightness-110' : 'scale-100'}`}
@@ -33,10 +33,10 @@ const ProductItem = ({ id, image, name, price, bestseller }) => {
                 />
             </div>
 
-            {/* ✅ Product Name */}
+            {/* Product Name */}
             <p className='pt-3 pb-1 text-md text-black dark:text-gray-50'>{name}</p>
 
-            {/* ✅ Product Price */}
+            {/* Product Price */}
             <p className='text-sm font-medium dark:text-gray-300'>{currency} {price}</p>
         </Link>
     );

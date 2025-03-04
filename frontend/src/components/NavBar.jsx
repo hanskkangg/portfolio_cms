@@ -22,9 +22,9 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
     return (
         <div className='flex flex-col items-center justify-between py-2 font-medium bg-[#FFFFFF] dark:bg-gray-900 dark:text-white transition-colors duration-300 px-5 opacity-100 w-full mt-2'>
 
-            {/* 🔹 Top Section: Search Bar | Logo | Icons */}
+            {/* Top Section: Search Bar | Logo | Icons */}
             <div className="flex items-center justify-between w-full max-w-6xl">
-                {/* 🔍 Search Bar (Left) */}
+                {/* Search Bar (Left) */}
                 <div className="flex items-center w-1/3">
                  
                     <img 
@@ -35,7 +35,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
                     />
                 </div>
 
-                {/* 🔹 Centered Logo */}
+                {/* Centered Logo */}
                 <div className="flex justify-center w-1/3">
                     <Link to='/'>
                         <img 
@@ -46,7 +46,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
                     </Link>
                 </div>
 
-                {/* 🔹 Right Side: Profile & Cart Icons */}
+                {/* Right Side: Profile & Cart Icons */}
                 <div className='flex items-center justify-end w-1/3 gap-6'>
                     <div className='group relative'>
                         <img 
@@ -78,7 +78,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
                 </div>
             </div>
 
-            {/* 🔹 Navigation Menu Centered Below Logo */}
+            {/* Navigation Menu Centered Below Logo */}
             <nav className='mt-2'>
                 <ul className='flex justify-center gap-8 text-sm text-gray-700 dark:text-gray-300'>
                     <NavLink to='/' className='flex flex-col items-center gap-1'>

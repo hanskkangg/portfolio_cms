@@ -82,7 +82,7 @@ const Orders = ({ token }) => {
                 </div>
                 <p>{order.address.phone}</p>
 
-              {/* ✅ Special Note (Only displayed if present) */}
+              {/* Special Note (Only displayed if present) */}
               {order.address.specialNote && (
                 <p className="mt-3 p-2 bg-yellow-100 border border-yellow-500 rounded">
                   <strong>Special Note:</strong> {order.address.specialNote}

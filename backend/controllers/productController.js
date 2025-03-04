@@ -99,7 +99,7 @@ const updateProduct = async (req, res) => {
             return res.status(404).json({ success: false, message: "Product not found" });
         }
 
-        // ✅ Log received files for debugging
+        // Log received files for debugging
         console.log("Received Files:", req.files);
 
         // Update text fields
@@ -109,9 +109,9 @@ const updateProduct = async (req, res) => {
         product.category = category;
         product.subCategory = subCategory;
         product.bestseller = bestseller === "true";
-        product.sizes = JSON.parse(sizes); // ✅ Convert sizes from JSON string to array
+        product.sizes = JSON.parse(sizes); //Convert sizes from JSON string to array
 
-        // ✅ Handle Image Uploads to Cloudinary
+        // Handle Image Uploads to Cloudinary
         const imageFields = ["image1", "image2", "image3", "image4"];
         let newImages = [];
 
@@ -126,7 +126,7 @@ const updateProduct = async (req, res) => {
             }
         }
 
-        // ✅ Ensure images are updated correctly
+        // Ensure images are updated correctly
         product.image = newImages;
 
         await product.save();

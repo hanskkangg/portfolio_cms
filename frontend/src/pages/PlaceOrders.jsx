@@ -29,7 +29,7 @@ const PlaceOrders = () => {
     const handlePaymentSelection = (paymentMethod) => {
         setMethod(paymentMethod);
 
-        // ✅ Open modal only when E-Transfer is selected
+        // Open modal only when E-Transfer is selected
         if (paymentMethod === "etransfer") {
             setShowETransferPopup(true);
         }
@@ -60,7 +60,7 @@ const PlaceOrders = () => {
                 address: formData,
                 items: orderItems,
                 amount: getCartAmount() + delivery_fee,
-                paymentMethod: method,  // ✅ Ensures correct payment method is sent
+                paymentMethod: method,
                 status: method === "etransfer" ? "pending" : "paid"
             };
     
@@ -75,7 +75,7 @@ const PlaceOrders = () => {
                     break;*/
     
                 case "etransfer":
-                             // ✅ Place order without showing modal again
+                             // Place order without showing modal again
                              const responseEtransfer = await axios.post(backendUrl + "/api/order/place", orderData, { headers: { token } });
                              if (responseEtransfer.data.success) {
                                  setCartItems({});
@@ -138,7 +138,7 @@ const PlaceOrders = () => {
                 </div>
                 <input required onChange={onChangeHandler} name='phone' value={formData.phone} className='border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded py-1.5 px-3.5 w-full' type="text" placeholder='Phone Number' />
 
-                {/* ✅ Special Note Section */}
+                {/* Special Note Section */}
                 <textarea 
                     name="specialNote" 
                     value={formData.specialNote}
@@ -222,7 +222,7 @@ const PlaceOrders = () => {
     </div>
                  
 
-                    {/* ✅ Improved Modal UI */}
+                    {/* Improved Modal UI */}
                     {showETransferPopup && (
                         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-sm">
                             <div className="bg-white w-[90%] max-w-md p-6 rounded-lg shadow-lg text-center animate-fadeIn">
@@ -247,7 +247,7 @@ const PlaceOrders = () => {
                         </div>
                     )}
 
-                    {/* ✅ PLACE ORDER button */}
+                    {/* PLACE ORDER button */}
                     <div className='w-full text-end mt-8'>
                         <button type='submit' 
                             className='bg-black text-white px-16 py-3 text-sm dark:bg-gray-700 dark:hover:bg-gray-600 transition-all rounded-md'>
