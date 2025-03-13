@@ -56,8 +56,8 @@ const Product = () => {
           <div className='w-full sm:w-[80%] relative'>
             {/* Bestseller Badge */}
             {productData.bestseller && (
-              <span className="absolute top-2 left-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
-                🔥 Bestseller
+              <span className="font-mono absolute top-2 left-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                👑 Best Seller
               </span>
             )}
             <img className='w-full h-auto rounded-lg dark:border-gray-700' src={image} alt='' />
@@ -71,7 +71,7 @@ const Product = () => {
           {/* Bestseller Badge (Above Product Name) */}
           {productData.bestseller && (
             <div className="mb-2 text-xs font-bold text-yellow-500 bg-yellow-100 px-3 py-1 rounded-md w-fit shadow">
-              🔥 Bestseller
+              👑 Best Seller
             </div>
           )}
 
@@ -156,11 +156,11 @@ const Product = () => {
       </div>
 
 {/* Bestseller Badge (Above Product Name) */}
-{productData.bestseller && (
+{/* {productData.bestseller && (
     <div className="mb-2 text-xs font-bold text-yellow-500 bg-yellow-100 px-3 py-1 rounded-md w-fit shadow">
         🔥 Bestseller
     </div>
-)}
+)} */}
 
       {/* Description & Review Section */}
       {/* <div className='mt-20'>
