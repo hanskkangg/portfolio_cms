@@ -9,17 +9,16 @@ import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
 import fetch from 'node-fetch';
 
-// ✅ Define `app` FIRST before using it!
+//  Define `app` 
 const app = express();
 const port = process.env.PORT || 4000;
 connectDB();
 connectCloudinary();
 
-// ✅ Middlewares
+//  Middlewares
 app.use(express.json());
 app.use(cors());
 
-// ✅ Fix: Register `/api/verify-turnstile` at the top before other routes
 app.post('/api/verify-turnstile', async (req, res) => {
     try {
         const { token } = req.body;
@@ -42,7 +41,7 @@ app.post('/api/verify-turnstile', async (req, res) => {
         });
 
         const data = await response.json();
-        console.log("🔍 Cloudflare Response:", data); // ✅ Debugging log
+        console.log("Cloudflare Response:", data);
 
         if (data.success) {
             return res.json({ verified: true });
@@ -50,21 +49,21 @@ app.post('/api/verify-turnstile', async (req, res) => {
             return res.status(400).json({ verified: false, message: "Cloudflare verification failed", details: data });
         }
     } catch (error) {
-        console.error("🚨 Error verifying Turnstile token:", error);
+        console.error("Error verifying Turnstile token:", error);
         res.status(500).json({ verified: false, message: "Server error" });
     }
 });
 
-// ✅ Register Other API Routes **after** verifying Turnstile
+// Register Other API Routes **after** verifying Turnstile
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
 
-// ✅ Default Route
+//  Default Route
 app.get('/', (req, res) => {
     res.send("API Working");
 });
 
-// ✅ Start Server
+// Start Server
 app.listen(port, () => console.log(`🚀 Server started on PORT: ${port}`));
