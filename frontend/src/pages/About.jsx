@@ -12,8 +12,8 @@ const About = () => {
       </div>
 
       <div className='mt-10 mb-20 flex flex-col md:flex-row gap-20  dark:text-gray-200'>
-          <img className='w-full md:max-w-[450px]  dark:text-gray-100 ml-10' src={assets.about_us} alt="" />
-          <div className='flex flex-col gap-6 md:w-2/4 text-gray-600 ml-10'>
+          <img className='w-full md:max-w-[400px] dark:text-gray-100' src={assets.about_us} alt="" />
+          <div className='flex flex-col gap-6 md:w-2/4 text-gray-600 ml-1 mr-10'>
 
           <b className='text-gray-800 dark:text-gray-200'>Our Story</b>
               <p className=' dark:text-gray-400'>Like A Hummingbird Angry But Alive Love Me Well Burning Feathers Dust It Off
