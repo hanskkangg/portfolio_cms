@@ -29,9 +29,9 @@ const TurnstileVerify = ({ onSuccess }) => {
     };
     document.body.appendChild(script);
   }, []);
-
   const handleVerify = async (token) => {
-    try {const response = await axios.post(`${BACKEND_URL}/verify-turnstile`, { token });
+    try {
+        const response = await axios.post(`${BACKEND_URL}/api/verify-turnstile`, { token }); // ✅ Correct
 
 
 
