@@ -9,7 +9,7 @@ const BestSeller = () => {
 
   useEffect(() => {
     const bestProduct = products.filter((item) => item.bestseller);
-    setBestSellers(bestProduct.slice(0, 10));
+    setBestSellers(bestProduct.slice(0, 6));
   }, [products]);
 
   return (
@@ -22,7 +22,7 @@ const BestSeller = () => {
       </div>
 
       {/* Product Grid - Ensuring Square Images */}
-      <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-3 sm:px-10 mt-5'>
+      <div className='grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 px-3 sm:px-10 mt-5'>
         {bestSellers.map((item, index) => (
           <div key={index} className="w-full aspect-square">
             <ProductItem 

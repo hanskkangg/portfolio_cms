@@ -8,7 +8,7 @@ const LatestCollection = () => {
     const [latestProducts, setLatestProducts] = useState([]);
 
     useEffect(() => {
-        setLatestProducts(products.slice(0, 10));
+        setLatestProducts(products.slice(0, 6));
     }, [products]);
 
     return (
@@ -21,7 +21,7 @@ const LatestCollection = () => {
             </div>
 
             {/* Product Grid with 2 Columns on Small Screens */}
-            <div className='mt-5 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-3 sm:px-10'>
+            <div className='mt-5 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 px-3 sm:px-10'>
             
                 {
                     latestProducts.map((item, index) => (
