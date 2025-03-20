@@ -45,8 +45,8 @@ const Footer = ({ isDarkMode }) => {
       {/* Footer Bottom Section */}
       <div className="mt-10">
         <hr className="border-gray-300 dark:border-gray-700" />
-        <p className="py-5 text-sm text-center text-gray-600 dark:text-gray-100 xl:mb-[-3%]
-        lg:mb-[-5%]">
+        <p className="py-5 text-sm text-center text-gray-600 dark:text-gray-100 mb-[-15%] md:mb-[-5%] xl:mb-[-3%]
+        lg:mb-[-1%]">
           Copyright 2024 © Baeyond Nails - All Rights Reserved.
         </p>
       </div>
