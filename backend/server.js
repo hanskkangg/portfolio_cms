@@ -9,16 +9,15 @@ import cartRouter from './routes/cartRoute.js';
 import orderRouter from './routes/orderRoute.js';
 import fetch from 'node-fetch';
 
-//  Define `app` 
 const app = express();
 const port = process.env.PORT || 4000;
 connectDB();
 connectCloudinary();
 
-//  Middlewares
 app.use(express.json());
 app.use(cors());
 
+// Place Turnstile Verification at the Global Level
 app.post('/api/verify-turnstile', async (req, res) => {
     try {
         const { token } = req.body;
@@ -49,21 +48,19 @@ app.post('/api/verify-turnstile', async (req, res) => {
             return res.status(400).json({ verified: false, message: "Cloudflare verification failed", details: data });
         }
     } catch (error) {
-        console.error("Error verifying Turnstile token:", error);
+        console.error("🚨 Error verifying Turnstile token:", error);
         res.status(500).json({ verified: false, message: "Server error" });
     }
 });
 
-// Register Other API Routes **after** verifying Turnstile
+// Move this after Turnstile Route
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 app.use('/api/cart', cartRouter);
 app.use('/api/order', orderRouter);
 
-//  Default Route
 app.get('/', (req, res) => {
     res.send("API Working");
 });
 
-// Start Server
 app.listen(port, () => console.log(`🚀 Server started on PORT: ${port}`));
