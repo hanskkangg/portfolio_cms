@@ -15,7 +15,8 @@ const ProductItem = ({ id, image, name, price, bestseller }) => {
             onMouseLeave={() => setHover(false)}
         >
             {/* Image Container */}
-            <div className='relative w-full h-[300px] overflow-hidden flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-lg'>
+            <div className="w-full h-full flex flex-col items-center justify-center text-center">
+          
 
                 {/* Bestseller Badge (Positioned Lower) */}
                 {bestseller && (
