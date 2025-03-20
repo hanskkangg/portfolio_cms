@@ -17,10 +17,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import Verify from './pages/Verify';
 import './sparkles.css'; // Import CSS for sparkles
 
+import TurnstileVerify from "./components/TurnstileVerify"; 
+
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
   });
+
+  
+  const [isVerified, setIsVerified] = useState(false);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -57,6 +62,16 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
+  
+  // Check if the user is verified with Turnstile
+  useEffect(() => {
+    const verifiedStatus = localStorage.getItem("turnstile_verified");
+    if (verifiedStatus) {
+      setIsVerified(true);
+    }
+  }, []);
+
+
   return (
     <div 
       className={`min-h-screen transition-colors duration-300 
@@ -64,6 +79,15 @@ const App = () => {
       relative overflow-hidden`}
     >
       <ToastContainer />
+
+      {!isVerified ? (
+        <TurnstileVerify onSuccess={() => {
+          setIsVerified(true);
+          localStorage.setItem("turnstile_verified", "true");
+        }} />
+      ) : (
+        <>
+      
       <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       <SearchBar />
       <Routes>
@@ -79,6 +103,8 @@ const App = () => {
         <Route path='/verify' element={<Verify />} />
       </Routes>
       <Footer isDarkMode={isDarkMode} />
+        </>
+      )}
     </div>
   );
 };
