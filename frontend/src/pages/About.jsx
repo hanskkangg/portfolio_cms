@@ -11,7 +11,7 @@ const About = () => {
           <Title text1={'ABOUT'} text2={'US'} />
       </div>
 
-      <div className='mt-10 mb-20 flex flex-col md:flex-row gap-20  dark:text-gray-200'>
+      <div className='mt-10 mb-20 flex flex-col md:flex-row gap-20  dark:text-gray-200 xl:ml-10 lg:ml-10 md:ml-10'>
           <img className='w-full md:max-w-[400px] dark:text-gray-100' src={assets.about_us} alt="" />
           <div className='flex flex-col gap-6 md:w-2/4 text-gray-600 ml-1 mr-10'>
 
