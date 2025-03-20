@@ -79,7 +79,7 @@ const Collection = () => {
   }, [sortType]);
 
   return (
-    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-all duration-300 ml-10 mr-10'>
+    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-all duration-300 xl:ml-10 xl:mr-10 lg:ml-10 lg:mr-10 mr-2 ml-2'>
 
       {/* Filter Options Section */}
       <div className='min-w-60'>
@@ -139,24 +139,20 @@ const Collection = () => {
           <Title text1={'ALL'} text2={'COLLECTIONS'} />
           
           {/* Product Sorting Dropdown */}
-          <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-300 dark:border-gray-600 text-sm px-2 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded'>
+          <select onChange={(e) => setSortType(e.target.value)} className='border-2 mt-[20%] lg:mt-1 xl:mt-1 border-gray-300 dark:border-gray-600 text-sm px-2 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded'>
             <option value="relavent">Sort by: Relevant</option>
             <option value="low-high">Sort by: Low to High</option>
             <option value="high-low">Sort by: High to Low</option>
           </select>
         </div>
 
+
         {/* Display Products */}
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-          {
+        <div className='mt-5 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 px-3 sm:px-10'>
+        {
             filterProducts.map((item, index) => (
-              <div key={index} className="relative">
-                {/* Bestseller Badge */}
-                {item.bestseller && (
-                  <span className="absolute top-2 left-2 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
-                    👑 Best Seller
-                  </span>
-                )}
+              <div key={index} className="w-full aspect-square">
+             
 
             <ProductItem 
     name={item.name} 
@@ -171,6 +167,8 @@ const Collection = () => {
             ))
           }
         </div>
+
+        
       </div>
     </div>
   );
