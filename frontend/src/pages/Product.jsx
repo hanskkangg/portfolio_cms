@@ -31,7 +31,7 @@ const Product = () => {
   }, [productId, products]);
 
   return productData ? (
-    <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 dark:border-none'>
+    <div className='border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 dark:border-none ml-10'>
 
       {/* Product Display Section */}
       <div className='flex gap-12 sm:gap-12 flex-col sm:flex-row'>

@@ -60,7 +60,7 @@ const Cart = () => {
   };
 
   return (
-    <div className='border-t pt-14 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100'>
+    <div className='border-t pt-14 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 ml-10 mr-10'>
 
       {/* Title */}
       <div className=' text-2xl mb-3'>

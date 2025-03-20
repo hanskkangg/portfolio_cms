@@ -47,7 +47,6 @@ const Collection = () => {
       productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
     }
 
-    // Apply Bestseller Filter
     if (bestseller) {
       productsCopy = productsCopy.filter(item => item.bestseller === true);
     }
@@ -80,7 +79,7 @@ const Collection = () => {
   }, [sortType]);
 
   return (
-    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-all duration-300'>
+    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-all duration-300 ml-10 mr-10'>
 
       {/* Filter Options Section */}
       <div className='min-w-60'>
@@ -91,7 +90,7 @@ const Collection = () => {
 
 
     {/* Bestseller Filter Section */}
-    <div className={`border border-gray-300 dark:border-gray-600 pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'} sm:block`}>
+    <div className={`border border-gray-300 dark:border-gray-600 pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'} sm:block `}>
           <p className='mb-3 text-sm font-medium dark:text-gray-300'>BESTSELLER</p>
           <div className='flex gap-2 text-sm font-light text-gray-700 dark:text-gray-400'>
             <input className='w-3' type="checkbox" checked={bestseller} onChange={() => setBestseller(!bestseller)} /> 

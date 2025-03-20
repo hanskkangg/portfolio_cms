@@ -4,19 +4,19 @@ import { assets } from '../assets/assets';
 const Footer = ({ isDarkMode }) => {
   return (
     <div className='mt-40'>
-      {/* Main Footer Layout */}
-      <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 text-sm'>
-       {/* Logo & Description */}
-       <div>
-          <img  
-            src={isDarkMode ?assets.baeyondnail : assets.baeyondnail} 
-            className='mb-5 w-20 transition-all duration-300' 
-            alt="Hans Kang Logo" 
-          />
-          <p className='w-full md:w-2/3 text-gray-600 dark:text-gray-300'>
-            Nokia today announced that it has acquired Rapid’s technology assets, 
-            including the world’s largest API marketplace, and its highly skilled team.
-          </p>
+    {/* Main Footer Layout */}
+    <div className='flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 text-sm '>
+      {/* Logo & Description */}
+      <div className='flex items-center space-x-4 ml-10'>
+        <img  
+          src={isDarkMode ? assets.baeyondnail : assets.baeyondnail} 
+          className='w-20 transition-all duration-300' 
+          alt="Hans Kang Logo" 
+        />
+        <p className='w-full md:w-2/3 text-gray-600 dark:text-gray-300'>
+          Nokia today announced that it has acquired Rapid’s technology assets, 
+          including the world’s largest API marketplace, and its highly skilled team.
+        </p>
         </div>
 
         {/* Company Links */}
@@ -45,7 +45,7 @@ const Footer = ({ isDarkMode }) => {
       <div className='mt-10'>
         <hr className='border-gray-300' />
         <p className='py-5 text-sm text-center text-gray-600 dark:text-gray-100'>
-          Copyright 2024 © hans.kang.com - All Rights Reserved.
+          Copyright 2024 © Baeyondnails - All Rights Reserved.
         </p>
       </div>
 
