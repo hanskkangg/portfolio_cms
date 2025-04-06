@@ -48,7 +48,7 @@ app.post('/api/verify-turnstile', async (req, res) => {
             return res.status(400).json({ verified: false, message: "Cloudflare verification failed", details: data });
         }
     } catch (error) {
-        console.error("🚨 Error verifying Turnstile token:", error);
+        console.error("Error verifying Turnstile token:", error);
         res.status(500).json({ verified: false, message: "Server error" });
     }
 });

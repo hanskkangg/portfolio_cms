@@ -109,7 +109,7 @@ const updateProduct = async (req, res) => {
         product.category = category;
         product.subCategory = subCategory;
         product.bestseller = bestseller === "true";
-        product.sizes = JSON.parse(sizes); //Convert sizes from JSON string to array
+        product.sizes = JSON.parse(sizes); 
 
         // Handle Image Uploads to Cloudinary
         const imageFields = ["image1", "image2", "image3", "image4"];
@@ -122,7 +122,8 @@ const updateProduct = async (req, res) => {
                 });
                 newImages.push(result.secure_url);
             } else {
-                newImages.push(product.image[imageFields.indexOf(field)]); // Keep old image if not replaced
+                 // Keep old image if not replaced
+                newImages.push(product.image[imageFields.indexOf(field)]);
             }
         }
 
@@ -155,7 +156,7 @@ const singleProduct = async (req, res) => {
         res.json({ success: true, product });
 
     } catch (error) {
-        console.error("🔥 Error fetching single product:", error);
+        console.error("Error fetching single product:", error);
         res.status(500).json({ success: false, message: "Internal Server Error" });
     }
 };

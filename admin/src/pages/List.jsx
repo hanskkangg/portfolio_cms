@@ -1,8 +1,8 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { backendUrl, currency } from '../App';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { backendUrl, currency } from "../App";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const List = ({ token }) => {
   const [list, setList] = useState([]);
@@ -10,7 +10,7 @@ const List = ({ token }) => {
 
   const fetchList = async () => {
     try {
-      const response = await axios.get(backendUrl + '/api/product/list');
+      const response = await axios.get(backendUrl + "/api/product/list");
       if (response.data.success) {
         setList(response.data.products.reverse());
       } else {
@@ -24,7 +24,11 @@ const List = ({ token }) => {
 
   const removeProduct = async (id) => {
     try {
-      const response = await axios.post(backendUrl + '/api/product/remove', { id }, { headers: { token } });
+      const response = await axios.post(
+        backendUrl + "/api/product/remove",
+        { id },
+        { headers: { token } }
+      );
 
       if (response.data.success) {
         toast.success(response.data.message);
@@ -48,8 +52,8 @@ const List = ({ token }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {list.map((item, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="relative bg-white shadow-md rounded-lg p-4 border border-gray-200 flex flex-col items-center text-center hover:shadow-lg transition duration-300"
           >
             {/* Bestseller Badge */}
@@ -60,23 +64,32 @@ const List = ({ token }) => {
             )}
 
             {/* Product Image */}
-            <img className="w-24 h-24 object-cover rounded-md border" src={item.image[0]} alt={item.name} />
+            <img
+              className="w-24 h-24 object-cover rounded-md border"
+              src={item.image[0]}
+              alt={item.name}
+            />
 
             {/* Product Details */}
-            <h3 className="text-lg font-semibold mt-2 text-gray-700">{item.name}</h3>
+            <h3 className="text-lg font-semibold mt-2 text-gray-700">
+              {item.name}
+            </h3>
             <p className="text-sm text-gray-500">{item.category}</p>
-            <p className="text-md font-semibold text-gray-800 mt-1">{currency}{item.price}</p>
+            <p className="text-md font-semibold text-gray-800 mt-1">
+              {currency}
+              {item.price}
+            </p>
 
             {/* Action Buttons */}
             <div className="flex gap-4 mt-3">
-              <button 
+              <button
                 onClick={() => navigate(`/edit/${item._id}`)}
                 className="px-4 py-1 text-sm bg-blue-500 text-white rounded-md shadow hover:bg-blue-600 transition duration-300"
               >
                 ✏️ Edit
               </button>
 
-              <button 
+              <button
                 onClick={() => removeProduct(item._id)}
                 className="px-4 py-1 text-sm bg-red-500 text-white rounded-md shadow hover:bg-red-600 transition duration-300"
               >
