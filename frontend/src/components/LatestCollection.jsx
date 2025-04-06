@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../context/ShopContext";
-import Title from "./Title";
 import ProductItem from "./ProductItem";
 
 const LatestCollection = () => {
@@ -8,7 +7,7 @@ const LatestCollection = () => {
   const [latestProducts, setLatestProducts] = useState([]);
 
   useEffect(() => {
-    setLatestProducts(products.slice(0, 6));
+    setLatestProducts(products.slice(0, 8));
   }, [products]);
 
   return (
@@ -21,7 +20,7 @@ const LatestCollection = () => {
       </div>
 
       {/* Product Grid with 2 Columns on Small Screens */}
-      <div className="mt-5 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 px-3 sm:px-10">
+      <div className="mt-5 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-3 sm:px-10">
         {latestProducts.map((item, index) => (
           <div key={index} className="w-full aspect-square">
             <ProductItem
