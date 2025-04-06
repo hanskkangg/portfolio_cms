@@ -25,7 +25,7 @@ const TurnstileVerify = ({ onSuccess }) => {
       console.log(" Cloudflare Turnstile script loaded.");
 
       if (turnstileRef.current) {
-        console.log("🔹 Rendering Turnstile...");
+        console.log("Rendering Turnstile...");
         window.turnstile.render(turnstileRef.current, {
           sitekey: "0x4AAAAAABB0uHYRf43VPEkE",
           callback: async (token) => {
@@ -44,7 +44,9 @@ const TurnstileVerify = ({ onSuccess }) => {
 
   const handleVerify = async (token) => {
     try {
-      const response = await axios.post(`${BACKEND_URL}/api/verify-turnstile`, { token });
+      const response = await axios.post(`${BACKEND_URL}/api/verify-turnstile`, {
+        token,
+      });
 
       if (response.data.verified) {
         console.log("Verification successful! Redirecting to Home...");

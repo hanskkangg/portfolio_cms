@@ -3,7 +3,8 @@ import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
-  const imageArray = [assets.n17, assets.n18, assets.n20]; // Three images
+  // Three images
+  const imageArray = [assets.n17, assets.n18, assets.n20];
   const navigate = useNavigate();
 
   return (
