@@ -15,7 +15,7 @@ import SearchBar from './components/SearchBar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Verify from './pages/Verify';
-import './sparkles.css'; // Import CSS for sparkles
+import './sparkles.css';
 
 import TurnstileVerify from "./components/TurnstileVerify"; 
 
@@ -46,7 +46,7 @@ const App = () => {
   // Creates animated sparkles
   useEffect(() => {
     const createSparkle = () => {
-      // Create TWO sparkles at a time (double amount)
+      // Create sparkles, we can change the amount by changing number to 1,2,3,4,5 etc..
       for (let i = 0; i < 3; i++) { 
         const sparkle = document.createElement("div");
         sparkle.classList.add("sparkle");
@@ -65,8 +65,8 @@ const App = () => {
       }
     };
 
-    // Reduce interval to 100ms (previously 200ms) to increase sparkle density
-    const interval = setInterval(createSparkle, 100);
+    // Reduce interval to 200ms to increase sparkle density
+    const interval = setInterval(createSparkle, 200);
     return () => clearInterval(interval);
   }, []);
 
