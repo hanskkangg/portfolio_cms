@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 
+// Structure for each order in the database
 const orderSchema = new mongoose.Schema({
     userId: { type: String, required: true },
     items: { type: Array, required: true },
@@ -17,5 +18,6 @@ const orderSchema = new mongoose.Schema({
     date: {type: Number, required:true}
 })
 
+// Avoid re-defining the model during development
 const orderModel = mongoose.models.order || mongoose.model('order',orderSchema)
 export default orderModel;

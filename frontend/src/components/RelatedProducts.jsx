@@ -9,8 +9,14 @@ const RelatedProducts = ({ category, subCategory }) => {
 
   useEffect(() => {
     if (products.length > 0) {
+      
+      // Make a copy of all products
       let productsCopy = products.slice();
+      
+      // Filter products that match the same category
       productsCopy = productsCopy.filter((item) => category === item.category);
+      
+      // Filter products that match the same sub-category
       productsCopy = productsCopy.filter(
         (item) => subCategory === item.subCategory
       );

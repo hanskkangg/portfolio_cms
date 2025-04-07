@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+
+// Structure for each product stored in the database
 const productSchema = new mongoose.Schema({
     name: { type: String, required: true }, 
     description: { type: String, required: true }, 
@@ -12,6 +14,8 @@ const productSchema = new mongoose.Schema({
     date: { type: Number, required: true }
 }, { timestamps: true }); 
 
+
+// Avoid re-defining the model during development
 const productModels = mongoose.models.product || mongoose.model("product", productSchema);
 
 export default productModels;

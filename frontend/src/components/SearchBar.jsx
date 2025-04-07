@@ -12,14 +12,17 @@ const SearchBar = () => {
   useEffect(() => {
     // Ensure search bar is always visible when the page loads
     setShowSearch(true);
+    
+    // Only show the search bar if user is on the "collection" page
     setVisible(location.pathname.includes("collection"));
-    // Added `setShowSearch` dependency to ensure it updates correctly
   }, [location, setShowSearch]); 
 
   return showSearch && visible ? (
     <div className="border-t border-b bg-gray-50 dark:bg-gray-800 text-center transition-all duration-300">
       {/* Search Input Box */}
       <div className="inline-flex items-center justify-center border border-gray-400 dark:border-gray-600 px-5 py-2 my-5 mx-3 rounded-full w-3/4 sm:w-1/2 bg-white dark:bg-gray-700">
+      
+        {/* Controlled search input */}
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -27,6 +30,8 @@ const SearchBar = () => {
           type="text"
           placeholder="Search"
         />
+        
+        {/* Search icon inside the input */}
         <img
           className="w-4 dark:invert"
           src={assets.search_icon}

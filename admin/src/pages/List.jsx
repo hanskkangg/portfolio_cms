@@ -8,10 +8,12 @@ const List = ({ token }) => {
   const [list, setList] = useState([]);
   const navigate = useNavigate();
 
+  // Load all products from backend
   const fetchList = async () => {
     try {
       const response = await axios.get(backendUrl + "/api/product/list");
       if (response.data.success) {
+        // Show latest products first
         setList(response.data.products.reverse());
       } else {
         toast.error(response.data.message);
@@ -22,6 +24,8 @@ const List = ({ token }) => {
     }
   };
 
+  
+  // Delete product by ID
   const removeProduct = async (id) => {
     try {
       const response = await axios.post(
@@ -32,6 +36,7 @@ const List = ({ token }) => {
 
       if (response.data.success) {
         toast.success(response.data.message);
+        // Refresh product list after deletion
         await fetchList();
       } else {
         toast.error(response.data.message);
@@ -42,6 +47,8 @@ const List = ({ token }) => {
     }
   };
 
+
+  // Load product list when page opens
   useEffect(() => {
     fetchList();
   }, []);
@@ -50,6 +57,7 @@ const List = ({ token }) => {
     <div className="max-w-6xl mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">📦 Product List</h2>
 
+      {/* Show each product in a card layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {list.map((item, index) => (
           <div

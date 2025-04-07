@@ -11,6 +11,7 @@ const Cart = () => {
     useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
+  // Get cart items with quantity more than 0 and prepare them to show on the screen
   useEffect(() => {
     if (products.length > 0) {
       const tempData = [];
@@ -37,7 +38,7 @@ const Cart = () => {
       quantity: cartItems[productId][size],
     };
 
-    //  Remove item from cart
+    // Remove item from cart
     updateQuantity(productId, size, 0);
 
     // Show toast notification with "Undo" button

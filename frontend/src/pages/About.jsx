@@ -6,10 +6,14 @@ import NewsletterBox from "../components/NewsLetter";
 const About = () => {
   return (
     <div>
+      {/* Section Title */}
       <div className="text-2xl text-center py-7 border-t  dark:text-gray-200 dark:border-y">
         <Title text1={"ABOUT"} text2={"US"} />
       </div>
 
+
+
+      {/* About Us Section with Image and Description */}
       <div className="mt-10 mb-20 flex flex-col md:flex-row gap-20  dark:text-gray-200 xl:ml-10 lg:ml-10 md:ml-10">
         <img
           className="w-full md:max-w-[400px] dark:text-gray-100"
@@ -18,6 +22,8 @@ const About = () => {
         />
         <div className="flex flex-col gap-6 md:w-2/4 text-gray-600 ml-1 mr-10">
           <b className="text-gray-800 dark:text-gray-200">Our Story</b>
+          
+           {/* Placeholder or stylized poetic content */}
           <p className=" dark:text-gray-400">
             Like A Hummingbird Angry But Alive Love Me Well Burning Feathers
             Dust It Off
@@ -44,10 +50,14 @@ const About = () => {
         </div>
       </div>
 
+
+      {/* Why Choose Us Section */}
       <div className=" text-2xl py-4 text-center">
         <Title text1={"WHY"} text2={"CHOOSE US"} />
       </div>
 
+
+      {/* Benefits Grid */}
       <div className="flex flex-col md:flex-row text-sm mb-20  dark:bg-gray-700">
         <div className="border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5">
           <img
@@ -89,6 +99,8 @@ const About = () => {
         </div>
       </div>
 
+
+      {/* Newsletter Subscription Section */}
       <NewsletterBox />
     </div>
   );

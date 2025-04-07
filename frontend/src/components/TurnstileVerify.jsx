@@ -10,10 +10,14 @@ const TurnstileVerify = ({ onSuccess }) => {
   const navigate = useNavigate();
   const turnstileRef = useRef(null);
 
+  
+  // Mark component as mounted so we can load Turnstile script
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
+  
+  // Load and render Turnstile widget after component is mounted
   useEffect(() => {
     if (!isMounted) return;
 
@@ -26,10 +30,12 @@ const TurnstileVerify = ({ onSuccess }) => {
 
       if (turnstileRef.current) {
         console.log("Rendering Turnstile...");
+        
+        // Render the Turnstile widget
         window.turnstile.render(turnstileRef.current, {
           sitekey: "0x4AAAAAABB0uHYRf43VPEkE",
           callback: async (token) => {
-            console.log("🔹 Turnstile token received:", token);
+            console.log("Turnstile token received:", token);
             handleVerify(token);
           },
           errorCallback: () => console.log("Turnstile verification error"),
@@ -42,6 +48,8 @@ const TurnstileVerify = ({ onSuccess }) => {
     document.body.appendChild(script);
   }, [isMounted]);
 
+
+  // Send Turnstile token to backend and verify
   const handleVerify = async (token) => {
     try {
       const response = await axios.post(`${BACKEND_URL}/api/verify-turnstile`, {
@@ -49,6 +57,8 @@ const TurnstileVerify = ({ onSuccess }) => {
       });
 
       if (response.data.verified) {
+        
+        // Mark as verified, trigger success callback, and redirect
         console.log("Verification successful! Redirecting to Home...");
         setVerified(true);
         localStorage.setItem("turnstile_verified", "true");

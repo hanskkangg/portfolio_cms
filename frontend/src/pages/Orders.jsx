@@ -8,6 +8,8 @@ const Orders = () => {
   const [orderData, setOrderData] = useState([]);
   const [trackingOrder, setTrackingOrder] = useState(null);
 
+  
+  // Load user's past orders from the backend
   const loadOrderData = async () => {
     try {
       if (!token) return;
@@ -19,6 +21,8 @@ const Orders = () => {
       );
       if (response.data.success) {
         let allOrdersItem = [];
+
+        // Combine all items from orders and add status and payment details
         response.data.orders.forEach((order) => {
           order.items.forEach((item) => {
             item["status"] = order.status;
@@ -29,6 +33,8 @@ const Orders = () => {
             allOrdersItem.push(item);
           });
         });
+        
+        // Show most recent orders first
         setOrderData(allOrdersItem.reverse());
       }
     } catch (error) {
@@ -36,17 +42,22 @@ const Orders = () => {
     }
   };
 
+
+  // Load orders when token becomes available
   useEffect(() => {
     loadOrderData();
   }, [token]);
 
+  
+  // Save the order the user wants to track
   const trackOrder = (order) => {
     setTrackingOrder(order);
   };
 
   return (
     <div className="border-t pt-16 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-all duration-300">
-      {/* Section Title */}
+      
+      {/* Page Title */}
       <div className="text-2xl">
         <Title text1={"MY"} text2={"ORDERS"} />
       </div>

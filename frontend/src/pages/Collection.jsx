@@ -14,10 +14,14 @@ const Collection = () => {
   const [sortType, setSortType] = useState("relavent");
   const [bestseller, setBestseller] = useState(false);
 
+  
+  // Scroll to top when this page loads
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  
+  // Add or remove a selected category from the filter list
   const toggleCategory = (e) => {
     setCategory((prev) =>
       prev.includes(e.target.value)
@@ -26,6 +30,8 @@ const Collection = () => {
     );
   };
 
+  
+  // Add or remove a selected sub-category from the filter list
   const toggleSubCategory = (e) => {
     setSubCategory((prev) =>
       prev.includes(e.target.value)
@@ -34,6 +40,8 @@ const Collection = () => {
     );
   };
 
+  
+  // Filter products based on search text, category, sub-category, and bestseller
   const applyFilter = () => {
     let productsCopy = products.slice();
 
@@ -62,6 +70,8 @@ const Collection = () => {
     setFilterProducts(productsCopy);
   };
 
+  
+  // Sort the filtered products by selected option
   const sortProduct = () => {
     let fpCopy = filterProducts.slice();
 
@@ -73,15 +83,20 @@ const Collection = () => {
         setFilterProducts(fpCopy.sort((a, b) => b.price - a.price));
         break;
       default:
+        // Default to relevant (original filtered list)
         applyFilter();
         break;
     }
   };
 
+  
+  // Re-apply filter whenever filter inputs or product list change
   useEffect(() => {
     applyFilter();
   }, [category, subCategory, bestseller, search, showSearch, products]);
 
+  
+  // Re-sort product list when sort option changes
   useEffect(() => {
     sortProduct();
   }, [sortType]);
@@ -90,6 +105,8 @@ const Collection = () => {
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-all duration-300 xl:ml-10 xl:mr-10 lg:ml-10 lg:mr-10 mr-2 ml-2">
       {/* Filter Options Section */}
       <div className="min-w-60">
+        
+        {/* Toggle filter visibility on small screens */}
         <p
           onClick={() => setShowFilter(!showFilter)}
           className="my-2 text-xl flex items-center cursor-pointer gap-2 dark:text-gray-200"

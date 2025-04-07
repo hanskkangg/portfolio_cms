@@ -12,7 +12,8 @@ const Login = ({ setToken }) => {
   // Function to handle form submission
   const onSubmitHandler = async (e) => {
     try {
-      e.preventDefault(); // Prevents page reload on form submission
+       // Prevents page reload on form submission
+      e.preventDefault();
 
       // Sending a request to the backend to check login credentials
       const response = await axios.post(backendUrl + "/api/user/admin", {
@@ -28,8 +29,9 @@ const Login = ({ setToken }) => {
         toast.error(response.data.message);
       }
     } catch (error) {
-      console.log(error); // Log any error for debugging
-      toast.error(error.message); // Show error message
+       // Log any error for debugging
+      console.log(error);
+      toast.error(error.message);
     }
   };
 

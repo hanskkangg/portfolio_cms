@@ -21,6 +21,8 @@ const PlaceOrders = () => {
 
   const [showETransferPopup, setShowETransferPopup] = useState(false);
 
+  
+  // User delivery input data
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -34,6 +36,8 @@ const PlaceOrders = () => {
     specialNote: "",
   });
 
+  
+  // When a payment option is selected
   const handlePaymentSelection = (paymentMethod) => {
     setMethod(paymentMethod);
 
@@ -42,15 +46,22 @@ const PlaceOrders = () => {
       setShowETransferPopup(true);
     }
   };
+
+  
+  // Update form input fields
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
     setFormData((data) => ({ ...data, [name]: value }));
   };
+
+  
+  // Handle form submit: process and send order to backend
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
       let orderItems = [];
-
+      
+      // Convert cartItems object to array of product objects
       for (const items in cartItems) {
         for (const item in cartItems[items]) {
           if (cartItems[items][item] > 0) {
@@ -66,6 +77,8 @@ const PlaceOrders = () => {
         }
       }
 
+      
+      // Final order data sent to backend
       let orderData = {
         address: formData,
         items: orderItems,
@@ -74,6 +87,8 @@ const PlaceOrders = () => {
         status: method === "etransfer" ? "pending" : "paid",
       };
 
+      
+      // Send order based on selected payment method
       switch (method) {
         /*case "paypal":
                     const responsePaypal = await axios.post(backendUrl + "/api/order/place", orderData, { headers: { token } });
@@ -145,6 +160,9 @@ const PlaceOrders = () => {
         <div className="text-xl sm:text-2xl my-3">
           <Title text1={"DELIVERY"} text2={"INFORMATION"} />
         </div>
+
+        
+        {/* User input fields for address and contact info */}
         <div className="flex gap-3">
           <input
             required
@@ -332,10 +350,11 @@ const PlaceOrders = () => {
             </div>
           </div>
 
-          {/* Improved Modal UI */}
+          {/* E-Transfer popup modal */}
           {showETransferPopup && (
             <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-60 backdrop-blur-sm">
               <div className="bg-white w-[90%] max-w-md p-6 rounded-lg shadow-lg text-center animate-fadeIn">
+              
                 {/* Close Button */}
                 <button
                   onClick={() => setShowETransferPopup(false)}

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
-import { assets } from "../assets/assets";
 import RelatedProducts from "../components/RelatedProducts";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,13 +18,17 @@ const Product = () => {
     products.map((item) => {
       if (item._id === productId) {
         setProductData(item);
+         // Set first image as default
         setImage(item.image[0]);
         return null;
       }
     });
   };
 
+  
+  // Run once when productId or product list changes
   useEffect(() => {
+    // Scroll to top on page load
     window.scrollTo({ top: 0, behavior: "smooth" });
     fetchProductData();
   }, [productId, products]);

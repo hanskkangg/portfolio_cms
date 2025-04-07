@@ -1,5 +1,8 @@
 import React from "react";
 
+
+
+// title component that displays heading
 const Title = ({ text1, text2 }) => {
   return (
     <div className="inline-flex gap-2 items-center mb-3">
@@ -11,6 +14,8 @@ const Title = ({ text1, text2 }) => {
           {text2}{" "}
         </span>{" "}
       </p>
+      
+      {/* Decorative line next to the heading */}
       <p className="w-8 sm:w-12 h-[1px] sm:h-[2px] bg-gray-700 dark:text-white"></p>
     </div>
   );

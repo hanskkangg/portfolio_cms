@@ -11,10 +11,14 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+    
+  // This function handles both login and sign up
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     try {
       if (currentState === "Sign Up") {
+        
+        // Send sign-up request to backend
         const response = await axios.post(backendUrl + "/api/user/register", {
           name,
           email,
@@ -31,6 +35,8 @@ const Login = () => {
           toast.error(response.data.message);
         }
       } else {
+        
+        // Send login request to backend
         const response = await axios.post(backendUrl + "/api/user/login", {
           email,
           password,
@@ -45,12 +51,17 @@ const Login = () => {
           toast.error(response.data.message);
         }
       }
+
     } catch (error) {
+      
+      // Show error message if something goes wrong
       console.log(error);
       toast.error(error.message);
     }
   };
 
+  
+  // If user is already logged in, send them to homepage
   useEffect(() => {
     if (token) {
       navigate("/");

@@ -1,5 +1,6 @@
 import {v2 as cloudinary} from "cloudinary"
 
+// Set Cloudinary configuration using environment variables
 const connectCloudinary = async() => {
 
     cloudinary.config({

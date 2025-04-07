@@ -5,11 +5,15 @@ import { backendUrl } from "../App";
 import { toast } from "react-toastify";
 
 const Add = ({ token }) => {
+  
+  // For image previews
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
-  const [image4, setImage4] = useState(false);
+  const [image4, setImage4] = useState(false);  
 
+  
+  // Form input states
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -18,12 +22,16 @@ const Add = ({ token }) => {
   const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
 
+  
+  // Form submission handler
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
     try {
       const formData = new FormData();
 
+      
+      // Append product data to formData
       formData.append("name", name);
       formData.append("description", description);
       formData.append("price", price);
@@ -32,11 +40,15 @@ const Add = ({ token }) => {
       formData.append("bestseller", bestseller);
       formData.append("sizes", JSON.stringify(sizes));
 
+      
+      // Append selected images only
       image1 && formData.append("image1", image1);
       image2 && formData.append("image2", image2);
       image3 && formData.append("image3", image3);
       image4 && formData.append("image4", image4);
 
+      
+      // Send product data to backend
       const response = await axios.post(
         backendUrl + "/api/product/add",
         formData,
@@ -45,6 +57,7 @@ const Add = ({ token }) => {
 
       if (response.data.success) {
         toast.success(response.data.message);
+        // Reset form fields
         setName("");
         setDescription("");
         setImage1(false);
@@ -66,6 +79,7 @@ const Add = ({ token }) => {
       onSubmit={onSubmitHandler}
       className="flex flex-col w-full items-start gap-3"
     >
+      {/* Image Upload Section */}
       <div>
         <p className="mb-2">Upload Image</p>
 
@@ -125,6 +139,8 @@ const Add = ({ token }) => {
         </div>
       </div>
 
+
+      {/* Product Name Input */}
       <div className="w-full">
         <p className="mb-2">Product name</p>
         <input
@@ -137,6 +153,8 @@ const Add = ({ token }) => {
         />
       </div>
 
+
+      {/* Product Description */}
       <div className="w-full">
         <p className="mb-2">Product description</p>
         <textarea
@@ -149,6 +167,8 @@ const Add = ({ token }) => {
         />
       </div>
 
+
+      {/* Category, Subcategory, and Price */}
       <div className="flex flex-col sm:flex-row gap-2 w-full sm:gap-8">
         <div>
           <p className="mb-2">Product category</p>
@@ -186,6 +206,8 @@ const Add = ({ token }) => {
         </div>
       </div>
 
+
+      {/* Select Sizes (Toggle) */}
       <div>
         <p className="mb-2">Product Sizes</p>
         <div className="flex gap-3">
@@ -281,6 +303,8 @@ const Add = ({ token }) => {
         </div>
       </div>
 
+
+      {/* Bestseller Toggle */}
       <div className="flex gap-2 mt-2">
         <input
           onChange={() => setBestseller((prev) => !prev)}
@@ -293,6 +317,7 @@ const Add = ({ token }) => {
         </label>
       </div>
 
+      {/* Submit Button */}
       <button type="submit" className="w-28 py-3 mt-4 bg-black text-white">
         ADD
       </button>

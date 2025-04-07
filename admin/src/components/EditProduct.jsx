@@ -6,9 +6,12 @@ import { toast } from "react-toastify";
 import { assets } from "../assets/assets";
 
 const EditProduct = ({ token }) => {
+  // Get product ID from URL
   const { productId } = useParams();
   const navigate = useNavigate();
 
+  
+  // States for product and its fields
   const [product, setProduct] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -17,10 +20,14 @@ const EditProduct = ({ token }) => {
   const [subCategory, setSubCategory] = useState("");
   const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
+  
+  // States for images
   const [image1, setImage1] = useState(null);
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
   const [image4, setImage4] = useState(null);
+  
+  // Load product details from server
   const fetchProductDetails = async () => {
     try {
       console.log(`Fetching: ${backendUrl}/api/product/single/${productId}`);
@@ -39,6 +46,8 @@ const EditProduct = ({ token }) => {
         setBestseller(prod.bestseller);
         setSizes(prod.sizes || []);
 
+
+        // Load existing image URLs
         if (prod.image && prod.image.length > 0) {
           setImage1(prod.image[0] || null);
           setImage2(prod.image[1] || null);
@@ -54,16 +63,21 @@ const EditProduct = ({ token }) => {
     }
   };
 
+  
+  // Fetch data when component loads
   useEffect(() => {
     fetchProductDetails();
   }, [productId]);
 
+  
+  // Toggle size selection
   const handleSizeSelection = (size) => {
     setSizes((prev) =>
       prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]
     );
   };
 
+  // Handle form submit to update product
   const handleUpdateProduct = async (e) => {
     e.preventDefault();
     try {
@@ -86,6 +100,8 @@ const EditProduct = ({ token }) => {
       if (image4 && typeof image4 === "object")
         formData.append("image4", image4);
 
+      
+      // Send updated product to backend
       const response = await axios.put(
         `${backendUrl}/api/product/update/${productId}`,
         formData,
@@ -105,6 +121,8 @@ const EditProduct = ({ token }) => {
     }
   };
 
+  
+  // Display form when product is loaded
   return product ? (
     <div className="p-6 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100">
       <h2 className="text-xl font-semibold mb-4 cursor-pointer">

@@ -9,10 +9,7 @@ import NewsLetter from "../components/NewsLetter";
 const Home = () => {
   return (
     <div>
-      {/* Whenever we open home we import the hero component */}
-
       <Hero />
-      {/* <Baeyond/> */}
       <LatestCollection />
       <BestSeller />
       <Policy />

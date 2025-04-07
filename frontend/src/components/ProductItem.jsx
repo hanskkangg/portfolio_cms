@@ -7,6 +7,8 @@ const ProductItem = ({ id, image, name, price, bestseller }) => {
   const [hover, setHover] = useState(false);
 
   return (
+    
+    // Whole product item is clickable and links to product details
     <Link
       className={`relative text-gray-700 cursor-pointer dark:text-gray-100 transition-all duration-300 ease-in-out 
                 ${hover ? "translate-y-[-10px]" : "translate-y-0"}`}

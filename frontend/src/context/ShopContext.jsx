@@ -16,6 +16,8 @@ const ShopContextProvider = (props) => {
   const [token, setToken] = useState("");
   const navigate = useNavigate();
 
+  
+  // Add item to cart and sync with backend if user is logged in
   const addToCart = async (itemId, size) => {
     if (!size) {
       toast.error("Select Product Size");
@@ -50,6 +52,8 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  
+  // Calculate total number of items in cart
   const getCartCount = () => {
     let totalCount = 0;
     for (const items in cartItems) {
@@ -64,11 +68,11 @@ const ShopContextProvider = (props) => {
     return totalCount;
   };
 
+  
+  // Change the quantity of a product in the cart
   const updateQuantity = async (itemId, size, quantity) => {
     let cartData = structuredClone(cartItems);
-
     cartData[itemId][size] = quantity;
-
     setCartItems(cartData);
 
     if (token) {
@@ -85,6 +89,8 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  
+  // Calculate total cart price based on product prices and quantities
   const getCartAmount = () => {
     let totalAmount = 0;
     for (const items in cartItems) {
@@ -100,6 +106,8 @@ const ShopContextProvider = (props) => {
     return totalAmount;
   };
 
+  
+  // Load all products from backend
   const getProductsData = async () => {
     try {
       const response = await axios.get(backendUrl + "/api/product/list");
@@ -114,6 +122,8 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  
+  // Load user's cart from backend using token
   const getUserCart = async (token) => {
     try {
       const response = await axios.post(
@@ -130,10 +140,14 @@ const ShopContextProvider = (props) => {
     }
   };
 
+  
+  // Load product data when app starts
   useEffect(() => {
     getProductsData();
   }, []);
 
+  
+  // Restore token and cart from local storage if available
   useEffect(() => {
     if (!token && localStorage.getItem("token")) {
       setToken(localStorage.getItem("token"));
@@ -144,6 +158,8 @@ const ShopContextProvider = (props) => {
     }
   }, [token]);
 
+  
+  // Provide all shared data and functions to other components
   const value = {
     products,
     currency,

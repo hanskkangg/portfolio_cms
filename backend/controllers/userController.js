@@ -1,8 +1,10 @@
 import validator from "validator";
-import bcryptjs from "bcryptjs"; // Correct import
+import bcryptjs from "bcryptjs";
 import jwt from 'jsonwebtoken';
 import userModel from "../models/userModel.js";
 
+
+// Create a token using user ID
 const createToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET)
 }
@@ -13,19 +15,19 @@ const loginUser = async (req, res) => {
 
         const { email, password } = req.body;
 
+        // Check if user exists in database
         const user = await userModel.findOne({ email });
-
         if (!user) {
             return res.json({ success: false, message: "User doesn't exists" })
         }
 
+        // Compare entered password with hashed password in DB
         const isMatch = await bcryptjs.compare(password, user.password);
 
         if (isMatch) {
-
+        // Generate JWT token           
             const token = createToken(user._id)
             res.json({ success: true, token })
-
         }
         else {
             res.json({ success: false, message: 'Invalid credentials' })
@@ -58,10 +60,10 @@ const registerUser = async (req, res) => {
         }
 
         // hashing user password
-         // Hash the user password using bcryptjs
          const salt = await bcryptjs.genSalt(10);
          const hashedPassword = await bcryptjs.hash(password, salt);
  
+        // Create and save user
          const newUser = new userModel({
              name,
              email,
@@ -69,7 +71,6 @@ const registerUser = async (req, res) => {
          });
 
         const user = await newUser.save()
-
         const token = createToken(user._id)
 
         res.json({ success: true, token })
@@ -86,6 +87,7 @@ const adminLogin = async (req, res) => {
         
         const {email,password} = req.body
 
+        // Check for matching admin credentials
         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
             const token = jwt.sign(email+password,process.env.JWT_SECRET);
             res.json({success:true,token})

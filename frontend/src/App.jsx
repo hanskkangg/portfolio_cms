@@ -20,13 +20,17 @@ import './sparkles.css'; // Import CSS for sparkles
 import TurnstileVerify from "./components/TurnstileVerify"; 
 
 const App = () => {
+  // Load dark mode preference from localStorage on initial load
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem("theme") === "dark";
   });
 
   
+  // Tracks whether user has passed Turnstile verification
   const [isVerified, setIsVerified] = useState(false);
 
+  
+  // Toggles dark/light theme
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
@@ -37,6 +41,9 @@ const App = () => {
     }
   }, [isDarkMode]);
 
+
+  
+  // Creates animated sparkles
   useEffect(() => {
     const createSparkle = () => {
       // Create TWO sparkles at a time (double amount)
