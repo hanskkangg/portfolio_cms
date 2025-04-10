@@ -10,7 +10,15 @@ Welcome! This is the source code repository for **Baeyond Nails** and ,a custom-
 
 This is a full-stack web application designed for small business owners looking to sell their products online. It includes everything from secure payment integration to admin tools for product and order management.
 
+
 ---
+
+## 🧱INFRASTRUCTURE
+
+![Architecture review](https://github.com/user-attachments/assets/65e941af-153d-498b-a3a5-a5a3a20f5078)
+
+---
+
 
 ## 🧱 Tech Stack
 
