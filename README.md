@@ -70,16 +70,32 @@ Clone the repo and install dependencies:
 ```bash
 git clone https://github.com/your-username/baeyond.git
 cd baeyond
-npm install
 ```
 
-Start the dev server:
+Start development servers:
 
+#### Frontend
 ```bash
+cd frontend
+npm install
 npm run dev
 ```
 
-Make sure to add your `.env` file with keys for:
+#### Backend
+You can now run the backend using Docker Compose:
+```bash
+cd ~
+docker-compose up --build
+```
+
+#### Admin Panel
+```bash
+cd admin
+npm install
+npm run dev
+```
+
+Make sure to add your `.env` files with keys for:
 - MongoDB
 - Firebase
 - Stripe / PayPal
