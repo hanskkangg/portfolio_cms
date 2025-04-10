@@ -108,12 +108,6 @@ This app is pre-configured for deployment on **Vercel**. Just push to GitHub and
 
 ---
 
-## 🧪 Final Thoughts
-
-This project was built for real-world clients to help manage their online presence and streamline business operations. If you're inspired to fork this repo or want to build something similar—go ahead! Just drop me a note or buy me a coffee ☕🙂
-
----
-
 ## 🙋‍♂️ About Me
 
 👋 I'm Hans Kang, a full-stack developer passionate about building scalable web apps and automating business processes.  
