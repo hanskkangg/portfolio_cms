@@ -1,6 +1,6 @@
-# 🛍️ Freelance E-commerce Websites
+# 🛍️ E-commerce Websites
 
-Welcome! This is the source code repository for **Baeyond Nails** and ,a custom-built freelance e-commerce websites crafted with love, React, and a focus on performance and user experience.
+Welcome! This is the source code repository for **Baeyond Nails** a custom-built freelance e-commerce websites crafted with love, React, and a focus on performance and user experience.
 
 🔗 **Live Projects**
 - [Baeyond Nails - LIVE](https://baeyondfrontend.vercel.app/)
@@ -8,7 +8,7 @@ Welcome! This is the source code repository for **Baeyond Nails** and ,a custom-
 
 ## 🤔 What’s Inside?
 
-This is a full-stack web application designed for small business owners looking to sell their products online. It includes everything from secure payment integration to admin tools for product and order management.
+This is a full-stack web application designed for small business owner looking to sell their products online. It includes everything from secure payment integration to admin tools for product and order management.
 
 
 ---
