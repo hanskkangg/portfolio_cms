@@ -33,7 +33,7 @@ const TurnstileVerify = ({ onSuccess }) => {
         
         // Render the Turnstile widget
         window.turnstile.render(turnstileRef.current, {
-          sitekey: "0x4AAAAAABB0uHYRf43VPEkE",
+          sitekey: "0x4AAAAAABQV8dsiokekCC4A",
           callback: async (token) => {
             console.log("Turnstile token received:", token);
             handleVerify(token);
