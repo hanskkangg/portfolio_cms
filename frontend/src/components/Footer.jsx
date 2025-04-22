@@ -14,8 +14,7 @@ const Footer = ({ isDarkMode }) => {
             alt="Baeyond Nails Logo"
           />
           <p className="w-full max-w-md text-gray-600 dark:text-gray-300">
-            Elevate your beauty with Baeyond Nails. Experience the finest nail
-            artistry.
+          This is a demo portfolio powered by a custom CMS — built to showcase projects, manage content, and highlight your brand effortlessly.
           </p>
         </div>
 
@@ -47,7 +46,7 @@ const Footer = ({ isDarkMode }) => {
           className="py-5 text-sm text-center text-gray-600 dark:text-gray-100 mb-[-15%] md:mb-[-5%] xl:mb-[-3%]
         lg:mb-[-1%]"
         >
-          Copyright 2024 © Baeyond Nails - All Rights Reserved.
+          Copyright 2024 © CMS personal Portfolio- All Rights Reserved.
         </p>
       </div>
     </div>
