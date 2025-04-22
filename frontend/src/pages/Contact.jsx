@@ -35,8 +35,8 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Newsletter subscription form */}
-      <NewsletterBox />
+      {/* Newsletter subscription form  removed */}
+      {/* <NewsletterBox /> */}
     </div>
   );
 };

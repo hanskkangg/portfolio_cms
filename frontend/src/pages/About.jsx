@@ -100,8 +100,8 @@ const About = () => {
       </div>
 
 
-      {/* Newsletter Subscription Section */}
-      <NewsletterBox />
+      {/* Newsletter Subscription Section removed */}
+      {/* <NewsletterBox /> */}
     </div>
   );
 };
